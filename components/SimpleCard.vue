@@ -1,6 +1,6 @@
 <template>
   <div id="card" class="clickable-element">
-    <img id="logo" :src="require(logo)" alt="logo"/>
+    <img id="logo" :src="logo" alt="logo"/>
     <div id="header" :style="style">
     </div>
     <div id="contents">
@@ -14,8 +14,8 @@ import { computed } from "vue";
 
 const props = defineProps({
   title: { type: String, default:"" },
-  logo:  { type: String, default:"../assets/logo.png" },
-  image: { type: String, default:"../assets/materiaal.jpg" },
+  logo:  { type: String, default:"assets/logo.png" },
+  image: { type: String, default:"assets/materiaal.jpg" },
 });
 
 const style = computed(function() {

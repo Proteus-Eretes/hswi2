@@ -1,6 +1,6 @@
 <template>
   <div id="card" class="clickable-element">
-    <img id="logo" :src="require(logo)" alt="logo"/>
+    <img id="logo" :src="logo" alt="logo"/>
     <span id="title">{{ title }}</span>
   </div>
 </template>
@@ -9,7 +9,7 @@
 
 const props = defineProps({
   title: { type: String, default:"Default title" },
-  logo:  { type: String, default:"../assets/logo.png" },
+  logo:  { type: String, default:"assets/logo.png" },
 });
 </script>
 
@@ -23,7 +23,8 @@ const props = defineProps({
 }
 
 #logo {
-
+  width: 4rem;
+  height: 4rem;
 }
 
 #title {
