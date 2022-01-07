@@ -1,6 +1,6 @@
 <template>
   <div id="card" class="clickable-element">
-    <img id="logo" :src="logo"/>
+    <img id="logo" :src="require(logo)" alt="logo"/>
     <span id="title">{{ title }}</span>
   </div>
 </template>
