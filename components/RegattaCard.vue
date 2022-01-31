@@ -11,20 +11,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "RegattaCard",
-  props: {
-    title: String,
-    logo: String,
-    image: String,
-  },
-  computed: {
-    style() {
-      return 'background-image: url("' + this.image + '")'
-    }
-  }
-}
+<script setup lang="ts">
+import { computed } from 'vue';
+
+const props = defineProps({
+  title: { type: String, default:"" },
+  logo:  { type: String, default:"../assets/logo.png" },
+  image: { type: String, default:"../assets/materiaal.jpg" },
+});
+
+const style = computed(function() {
+  return 'background-image: url("' + props.image + '")'
+});
 </script>
 
 <style scoped>
@@ -67,14 +65,15 @@ export default {
   color: white;
   align-content: center;
   background: linear-gradient(
-      #21212100 45%,
-      #212121FF 70%,
-      #212121FF 100%);
+      #ffffff00 45%,
+      var(--primary-color-dark) 70%,
+      var(--primary-color-dark) 100%);
 }
 
 #card-title {
   flex-grow: 1;
   font-size: x-large;
   font-family: sans-serif;
+  text-align: center;
 }
 </style>
