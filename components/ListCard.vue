@@ -8,7 +8,7 @@
 <script setup lang="ts">
 defineProps({
   title: { type: String, default:"Default title" },
-  logo:  { type: String, default:"public/logo.png" },
+  logo:  { type: String, default:"/logo.png" },
 });
 </script>
 
