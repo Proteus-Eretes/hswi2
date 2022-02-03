@@ -1,25 +1,28 @@
 <template>
-  <div id="card" class="clickable-element">
+  <div id="card">
     <img id="logo" :src="logo" alt="logo"/>
     <span id="title">{{ title }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-
-const props = defineProps({
+defineProps({
   title: { type: String, default:"Default title" },
   logo:  { type: String, default:"assets/logo.png" },
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #card {
   display: flex;
   background-color: var(--primary-color-dark);
   padding: 0.5rem;
-  border-radius: var(--corner-radius);
-  width: 20rem;
+  width: 100%;
+
+  &:hover, &:active {
+    background-color: var(--primary-color-x-dark);
+    cursor: pointer;
+  }
 }
 
 #logo {
@@ -36,4 +39,11 @@ const props = defineProps({
   text-align: center;
 }
 
+/* For desktop design */
+@media only screen and (min-width: 768px) {
+  #card {
+    border-radius: var(--corner-radius);
+    width: 20rem;
+  }
+}
 </style>

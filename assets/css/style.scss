@@ -1,8 +1,12 @@
 :root {
     /* PRIMARY COLOR */
-    --primary-color-light: #4f83cc;
-    --primary-color: #01579b;
-    --primary-color-dark: #002f6c;
+    --primary-color-xx-light: #62B8FC;
+    --primary-color-x-light: #35A4FB;
+    --primary-color-light: #088FFA;
+    --primary-color: #0476D0;
+    --primary-color-dark: #035CA3;
+    --primary-color-x-dark: #024376;
+    --primary-color-xx-dark: #012949;
 
     /* SECONDARY COLOR */
     --secondary-color-light: #e6ffff;
@@ -75,7 +79,7 @@
     --margin-input: var(--padding-medium) var(--padding-small);
 
     /* ELEMENT SPECIFICATIONS */
-    --background-color: var(--primary-color-light);
+    --background-color: var(--secondary-color-light);
     --color: var(--secondary-color-light);
 }
 
@@ -90,14 +94,4 @@ body {
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background: var(--background-color);
     color: var(--color);
-    overflow: hidden;
-}
-
-.clickable-element {
-    transition: ease 0.1s;
-
-    &:hover, &:focus {
-        transform: scale(1.03);
-        cursor: pointer;
-    }
 }

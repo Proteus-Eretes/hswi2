@@ -2,43 +2,78 @@
   <div>
     <div id="header">
       <span id="title">HOE SNEL WAS IK?</span>
-      <div id="search">Zoeken</div>
-      <!--<img id="settings" src="../assets/settings_black_24dp.svg" alt="settings"/>-->
+      <div id="search">
+        <span>Zoeken</span>
+        <i class="material-icons">search</i>
+      </div>
     </div>
     <div id="content">
       <slot/>
     </div>
+    <div id="footer">
+      Hoe Snel Was Ik: Footer
+    </div>
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
 #header {
   display: flex;
   background: var(--primary-color-dark);
-  height: 5rem;
+  width: 100%;
+  height: 3.5rem;
   align-items: center;
-  padding: 0 1rem;
+  position: fixed;
+  top: 0;
 }
 
 #title {
-  font-size: xxx-large;
+  font-size: xx-large;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
 }
 
 #search {
-  background: var(--primary-color-light);
-  width: 30rem;
-  padding: 0.7rem;
+  display: none;
+  flex: 1;
+  background: var(--primary-color-xx-light);
+  color: var(--grey-color-800);
+  padding: 0.5rem;
   border-radius: var(--corner-radius);
   position: absolute;
-  right: calc(50vw - 15rem);
-}
 
-#settings {
-  transform: scale(2);
+  &>i {
+    flex: 1;
+    text-align: right;
+    white-space: nowrap
+  }
 }
 
 #content {
-  height:  calc(100vh - 5rem);
-  overflow-y: scroll;
+  padding: 3.5rem 0 0 0;
+}
+
+#footer {
+  display: flex;
+  background: var(--primary-color-dark);
+  width: 100%;
+  height: 5rem;
+  align-items: center;
+}
+
+
+/* For desktop design */
+@media only screen and (min-width: 768px) {
+  #title {
+    font-size: xx-large;
+    font-weight: bold;
+  }
+
+  #search {
+    display: flex;
+    width: 30rem;
+    right: calc(50vw - 15rem);
+  }
 }
 </style>

@@ -1,67 +1,66 @@
 <template>
   <div id="card" class="clickable-element">
-    <img id="logo" :src="logo" alt="logo"/>
-    <div id="header" :style="style">
+    <div>
+      <img id="logo" :src="logo" alt="logo"/>
     </div>
-    <div id="contents">
-      <span>{{ title }}</span>
+    <span id="title">{{ title }}</span>
+    <div>
+      meer info hier plaatsen
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-
-const props = defineProps({
-  title: { type: String, default:"" },
+defineProps({
+  title: { type: String, default:"Default title" },
   logo:  { type: String, default:"assets/logo.png" },
-  image: { type: String, default:"assets/materiaal.jpg" },
-});
-
-const style = computed(function() {
-  return 'background-image: url("' + props.image + '")'
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #card {
   display: flex;
   flex-direction: column;
-  width: 12rem;
-  height: 15rem;
-  border-radius: var(--corner-radius);
-  overflow: hidden;
-  user-select: none;
-  position: relative;
-}
-
-#header {
-  background-size: 100%;
-  flex: 7rem;
-  padding: 0.5rem 0.5rem 0;
-  border-bottom: 3px solid var(--primary-color-light);
-}
-
-#contents {
-  display: flex;
-  flex: 8rem;
+  align-items: center;
   background: var(--primary-color-dark);
-  padding: 0 0.5rem 0.5rem;
-  justify-content: center;
+  width: 100%;
+  padding: 1rem;
 }
 
-#contents>span {
-  align-self: flex-end;
-  padding-bottom: 0.5rem;
+#title {
+  display: flex;
+  font-size: x-large;
+  width: 100%;
+  margin: auto 0;
+  justify-content: center;
   text-align: center;
-  font-size: large;
 }
 
 #logo {
   display: flex;
-  position: absolute;
-  width: 8rem;
-  height: 8rem;
-  padding: 3rem 2rem;
+  width: 6rem;
+  height: 6rem;
+}
+
+@media only screen and (min-width: 768px) {
+  #card {
+    width: 20rem;
+    height: 15rem;
+    border-radius: var(--corner-radius);
+  }
+
+  #logo {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .clickable-element {
+    transition: ease 0.1s;
+
+    &:hover, &:focus {
+      transform: scale(1.03);
+      cursor: pointer;
+    }
+  }
 }
 </style>

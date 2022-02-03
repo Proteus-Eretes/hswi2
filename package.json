@@ -9,6 +9,7 @@
     "nuxt3": "latest"
   },
   "dependencies": {
+    "@mdi/font": "^6.5.95",
     "sass": "^1.45.2"
   }
 }

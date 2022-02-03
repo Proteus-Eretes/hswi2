@@ -1,16 +1,13 @@
 <template>
   <div id="wrapper">
-    <span id="title">{{ text }}</span>
+    <span id="title">Alle Wedstrijden</span>
     <div id="content">
-      <slot></slot>
+      <slot/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
-  text: { type: String, default: "Default Headline" },
-});
 </script>
 
 <style scoped lang="scss">
@@ -19,12 +16,13 @@ defineProps({
   font-weight: bold;
   text-align: center;
   color: black;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 #wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0.1rem;
 }
 
 #content {
@@ -35,21 +33,20 @@ defineProps({
 }
 
 /* For desktop design */
-@media only screen and (min-width: 768px) {
+@media only screen and(min-width: 768px) {
   #title {
-    color: var(--color);
     font-size: xx-large;
-    margin: 3rem 0;
+    margin: 2rem 0;
   }
 
   #wrapper {
-    background: url("assets/highlight_background.jpg") center;
-    background-size: cover;
+    align-items: center;
+    margin-bottom: 2rem;
   }
 
   #content {
-    gap: 1rem;
-    margin-bottom: 6rem;
+    width: 50rem;
+    gap: 0.2rem;
   }
 }
 </style>

@@ -2,12 +2,12 @@
   <div class="center-object">
     <RegattaHighlight text="Recente wedstrijden">
       <SimpleCard
-          v-for="regatta in data.slice(0,5)"
+          v-for="regatta in data.slice(0,3)"
           :key="regatta.shortname"
           :title="regatta.regattaname"
       />
     </RegattaHighlight>
-    <RegattaHighlight text="Alle wedstrijden">
+    <RegattaList>
       <ListCard
         v-for="regatta in data"
         :key="regatta.shortname"
@@ -18,7 +18,7 @@
           :key="regatta.shortname"
           :title="regatta.regattaname"
       />
-    </RegattaHighlight>
+    </RegattaList>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import { ref } from 'vue';
 import SimpleCard from "../components/SimpleCard.vue";
 import { api } from '~/util/ApiData';
 import RegattaHighlight from "~/components/RegattaHighlight.vue";
+import RegattaList from "~/components/RegattaList.vue";
 import ListCard from "~/components/ListCard.vue";
 
 const data = ref(api);
@@ -35,9 +36,6 @@ const data = ref(api);
 <style scoped>
 .center-object {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin: 1rem 20%;
+  flex-direction: column;
 }
 </style>
