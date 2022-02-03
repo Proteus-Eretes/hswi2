@@ -45,7 +45,7 @@
   }
 
   #content {
-    width: 50rem;
+    width: 55rem;
     gap: 0.2rem;
   }
 }

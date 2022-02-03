@@ -43,7 +43,7 @@ defineProps({
 @media only screen and (min-width: 768px) {
   #card {
     border-radius: var(--corner-radius);
-    width: 20rem;
+    width: 25rem;
   }
 }
 </style>
