@@ -1,30 +1,43 @@
 <template>
-  <div id="card" class="clickable-element">
-    <div>
-      <img id="logo" :src="logo" alt="logo"/>
+  <NuxtLink id="link" :to="link">
+    <div id="card" class="clickable-element">
+      <div id="content">
+        <img id="logo" :src="logo" alt="logo"/>
+        <span id="title">{{ title }}</span>
+      </div>
+      <div id="buttongroup">
+        <div class="button">Loting</div>
+        <div class="button">Uitslagen</div>
+        <div class="button">Info</div>
+      </div>
     </div>
-    <span id="title">{{ title }}</span>
-    <div>
-      meer info hier plaatsen
-    </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
 defineProps({
   title: { type: String, default:"Default title" },
   logo:  { type: String, default:"/logo.png" },
+  link:  { type: String, default:"/404"},
 });
 </script>
 
 <style scoped lang="scss">
+#link {
+  text-decoration: none;
+  color: var(--color);
+}
+
 #card {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: var(--primary-color-dark);
   width: 100%;
-  padding: 1rem;
+}
+
+#content {
+  padding: 1rem 0 1rem;
 }
 
 #title {
@@ -54,12 +67,28 @@ defineProps({
     height: 8rem;
   }
 
+  #buttongroup {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    :nth-child(-n+2) {
+      border-right: var(--primary-color-x-dark) 2px solid;
+    }
+  }
+
+  .button {
+    width: 100%;
+    padding: 0.7rem;
+    text-align: center;
+    border-top: var(--primary-color-x-dark) 2px solid;
+  }
+
   .clickable-element {
     transition: ease 0.1s;
 
     &:hover, &:focus {
       transform: scale(1.03);
-      cursor: pointer;
     }
   }
 }

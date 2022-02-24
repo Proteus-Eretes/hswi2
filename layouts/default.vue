@@ -23,6 +23,7 @@
   height: 3.5rem;
   position: fixed;
   top: 0;
+  z-index: 1;
 }
 
 #title {

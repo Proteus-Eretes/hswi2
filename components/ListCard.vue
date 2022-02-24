@@ -1,23 +1,30 @@
 <template>
-  <div id="card">
-    <img id="logo" :src="logo" alt="logo"/>
-    <span id="title">{{ title }}</span>
-  </div>
+  <NuxtLink id="link" :to="link">
+    <div id="card">
+      <img id="logo" :src="logo" alt="logo"/>
+      <span id="title">{{ title }}</span>
+    </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
 defineProps({
   title: { type: String, default:"Default title" },
   logo:  { type: String, default:"/logo.png" },
+  link:  { type: String, default:"/404"}
 });
 </script>
 
 <style scoped lang="scss">
+#link {
+  text-decoration: none;
+  color: var(--color);
+}
+
 #card {
   display: flex;
   background-color: var(--primary-color-dark);
   padding: 0.5rem;
-  width: 100%;
 
   &:hover, &:active {
     background-color: var(--primary-color-x-dark);

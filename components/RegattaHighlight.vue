@@ -43,7 +43,7 @@ defineProps({
   }
 
   #wrapper {
-    background: url("../public/highlight_background.jpg") center;
+    background: url("/highlight_background.jpg") center;
     background-size: cover;
   }
 
