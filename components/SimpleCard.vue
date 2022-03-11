@@ -34,6 +34,9 @@ defineProps({
 
 #content {
   padding: 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #title {
@@ -46,7 +49,6 @@ defineProps({
 }
 
 #logo {
-  display: flex;
   width: 6rem;
   height: 6rem;
 }
