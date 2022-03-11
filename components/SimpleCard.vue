@@ -1,15 +1,9 @@
 <template>
-  <NuxtLink id="link" :to="link">
-    <div id="card" class="clickable-element">
-      <div id="content">
-        <img id="logo" :src="logo" alt="logo"/>
-        <span id="title">{{ title }}</span>
-      </div>
-      <div id="buttongroup">
-        <div class="button">Loting</div>
-        <div class="button">Uitslagen</div>
-        <div class="button">Info</div>
-      </div>
+  <NuxtLink id="card" :to="link">
+    <div id="content">
+      <img id="logo" :src="logo" alt="logo"/>
+      <span id="title">{{ title }}</span>
+      <span>Meer info hier</span>
     </div>
   </NuxtLink>
 </template>
@@ -23,17 +17,19 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-#link {
+#card {
   text-decoration: none;
   color: var(--color);
-}
-
-#card {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: var(--primary-color-dark);
   width: 100%;
+
+  &:hover, &:active {
+    background-color: var(--primary-color-x-dark);
+    cursor: pointer;
+  }
 }
 
 #content {
@@ -65,31 +61,6 @@ defineProps({
   #logo {
     width: 8rem;
     height: 8rem;
-  }
-
-  #buttongroup {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-
-    :nth-child(-n+2) {
-      border-right: var(--primary-color-x-dark) 2px solid;
-    }
-  }
-
-  .button {
-    width: 100%;
-    padding: 0.7rem;
-    text-align: center;
-    border-top: var(--primary-color-x-dark) 2px solid;
-  }
-
-  .clickable-element {
-    transition: ease 0.1s;
-
-    &:hover, &:focus {
-      transform: scale(1.03);
-    }
   }
 }
 </style>

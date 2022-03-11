@@ -1,13 +1,10 @@
 <template>
   <div class="center-object">
-    <RegattaHighlight text="Recente wedstrijden">
-      <SimpleCard
-          v-for="regatta in recent"
-          :key="regatta.shortname"
-          :title="regatta.regattaname"
-          @click=""
-      />
-    </RegattaHighlight>
+    <div id="welcome">
+      <span id="title">HOE SNEL WAS IK?</span>
+      <RegattaSearch />
+      <span id="more">v MORE v</span>
+    </div>
     <RegattaList>
       <ListCard
         v-for="regatta in regattas"
@@ -25,6 +22,11 @@ import RegattaList from "~/components/RegattaList.vue";
 import ListCard from "~/components/ListCard.vue";
 import axios from 'axios';
 import {onMounted} from "@vue/runtime-core";
+import RegattaSearch from "~/components/RegattaSearch.vue";
+
+definePageMeta({
+  layout: "noheader",
+})
 
 const regattas = ref();
 const recent = ref();
@@ -53,5 +55,27 @@ function sortRegattas(array): Array<object> {
 .center-object {
   display: flex;
   flex-direction: column;
+}
+
+#welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #024376;
+  height: 100vh;
+}
+
+#title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* For desktop design */
+@media only screen and (min-width: 768px) {
+  #title {
+    font-size: 6rem;
+    font-weight: bold;
+  }
 }
 </style>
