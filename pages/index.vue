@@ -4,16 +4,14 @@
       <SimpleCard
           v-for="regatta in recent"
           :key="regatta.shortname"
-          :title="regatta.regattaname"
-          :link="concatStrings(regatta.shortname, regatta.jaar)"
+          :regatta="regatta"
       />
     </RegattaHighlight>
     <RegattaList>
       <ListCard
         v-for="regatta in regattas"
         :key="regatta.shortname"
-        :title="regatta.regattaname"
-        :link="concatStrings(regatta.shortname, regatta.jaar)"
+        :regatta="regatta"
       />
     </RegattaList>
   </div>
@@ -29,22 +27,18 @@ import {Regatta} from "~/models/regatta";
 
 const regattaService = useRegattaService();
 
-const regattas = ref();
-const recent = ref();
+const regattas = ref<Regatta[]>();
+const recent = ref<Regatta[]>();
 
 onMounted(async () => {
-  const data = await regattaService.loadRegattas();
+  const data = await regattaService.getRegattas();
   regattas.value = sortRegattas(data);
   recent.value = data.slice(0,3)
 })
 
 function sortRegattas(array): Array<Regatta> {
-  return array.sort((a,b) => a.regattaname.localeCompare(b.regattaname))
+  return array.sort((a,b) => a.name.localeCompare(b.name))
   //TODO: implement sort by date
-}
-
-function concatStrings(regatta, year): string {
-  return regatta + '/' + year;
 }
 </script>
 

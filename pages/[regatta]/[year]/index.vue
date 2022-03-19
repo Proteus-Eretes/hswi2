@@ -1,25 +1,14 @@
 <template>
-  <div id="regattaname">
+  <div id="name">
     <span>{{ $route.params.regatta }}</span>
   </div>
-  <span>{{ regattas }}</span>
 </template>
 
 <script setup lang="ts">
-import {onMounted} from "@vue/runtime-core";
-
-const route = useRoute();
-const fieldService = useFieldService();
-
-const fields = ref();
-
-onMounted(async () => {
-  fields.value = fieldService.loadFields(route.params.regatta, route.params.year);
-});
 </script>
 
 <style scoped lang="scss">
-#regattaname {
+#name {
   width: 100%;
   height: 50vh;
   display: flex;

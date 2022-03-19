@@ -1,18 +1,13 @@
 <template>
   <div id="landing">
     <span id="title">HOE SNEL WAS IK?</span>
-    <div>
-      <input id="search" type="search" placeholder="Zoeken" v-model="searchQuery">
-      <button id="search-button">
-        <i class="material-icons-outlined">search</i>
-      </button>
-    </div>
+    <RegattaSearch/>
     <span>Recente Regattas</span>
     <div id="recent">
       <SimpleCard
           v-for="regatta in recent"
           :key="regatta.shortname"
-          :title="regatta.regattaname"
+          :regatta="regatta"
       />
     </div>
   </div>
@@ -21,26 +16,28 @@
 <script setup lang="ts">
 import {onMounted} from "@vue/runtime-core";
 import axios from "axios";
+import RegattaSearch from "~/components/RegattaSearch.vue";
+import {Regatta} from "~/models/regatta";
 
 definePageMeta({
   layout: "noheader",
 });
 
-const searchQuery = ref();
+const regattaService = useRegattaService();
+
+const regattas = ref();
 const recent = ref();
 
 onMounted(async () => {
-  const { data } = await axios('https://www.hoesnelwasik.nl/api/')
-  const wedstrijden = [];
-  for (let regatta of data.regattas) {
-    if (wedstrijden.find(e => e.regattaname == regatta.regattaname) === undefined) {
-      wedstrijden.push({ regattaname: regatta.regattaname, years: [regatta.jaar], shortname: regatta.shortname })
-    } else {
-      wedstrijden.find(e => e.regattaname == regatta.regattaname).years.push(regatta.jaar)
-    }
-  }
-  recent.value = wedstrijden.slice(0,3)
+  const data = await regattaService.getRegattas();
+  regattas.value = sortRegattas(data);
+  recent.value = data.slice(0,3)
 })
+
+function sortRegattas(array): Array<Regatta> {
+  return array.sort((a,b) => a.regattaname.localeCompare(b.regattaname))
+  //TODO: implement sort by date
+}
 </script>
 
 <style scoped lang="scss">
@@ -59,17 +56,6 @@ onMounted(async () => {
   font-weight: bold;
 }
 
-#search {
-  font-size: 1.3rem;
-  padding: 0.5rem 0.3rem;
-  width: 40rem;
-}
-
-#search-button {
-  height: 100%;
-  color: black;
-}
-
 #recent {
   display: flex;
   flex-direction: row;
@@ -79,8 +65,5 @@ onMounted(async () => {
 
 /* For desktop design */
 @media only screen and(min-width: 768px) {
-  #tet {
-    color: black;
-  }
 }
 </style>

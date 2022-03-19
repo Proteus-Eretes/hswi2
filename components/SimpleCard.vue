@@ -1,18 +1,19 @@
 <template>
-  <NuxtLink id="card" :to="link">
+  <NuxtLink id="card" :to="regatta.link">
     <div id="content">
       <img id="logo" :src="logo" alt="logo"/>
-      <span id="title">{{ title }}</span>
+      <span id="title">{{ regatta.name }}</span>
       <span>Meer info hier</span>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
+import {Regatta, RegattaNotFound} from "~/models/regatta";
+
 defineProps({
-  title: { type: String, default:"Default title" },
+  regatta: { type: Regatta, default: RegattaNotFound },
   logo:  { type: String, default:"/logo.png" },
-  link:  { type: String, default:"/404"},
 });
 </script>
 
