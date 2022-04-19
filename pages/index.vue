@@ -2,16 +2,18 @@
   <div class="center-object">
     <RegattaHighlight text="Recente wedstrijden">
       <SimpleCard
-          v-for="regatta in recent"
+          v-for="regatta in regattas.recentRegattas"
           :key="regatta.shortname"
           :regatta="regatta"
+          @click="regattas.selectRegatta(regatta)"
       />
     </RegattaHighlight>
     <RegattaList>
       <ListCard
-        v-for="regatta in regattas"
+        v-for="regatta in regattas.allRegattas"
         :key="regatta.shortname"
         :regatta="regatta"
+        @click="regattas.selectRegatta(regatta)"
       />
     </RegattaList>
   </div>
@@ -22,24 +24,13 @@ import SimpleCard from "../components/SimpleCard.vue";
 import RegattaHighlight from "~/components/RegattaHighlight.vue";
 import RegattaList from "~/components/RegattaList.vue";
 import ListCard from "~/components/ListCard.vue";
-import {onMounted} from "@vue/runtime-core";
-import {Regatta} from "~/models/regatta";
+import {useRegattaStore} from "~/stores/regatta";
 
-const regattaService = useRegattaService();
-
-const regattas = ref<Regatta[]>();
-const recent = ref<Regatta[]>();
+const regattas = useRegattaStore();
 
 onMounted(async () => {
-  const data = await regattaService.getRegattas();
-  regattas.value = sortRegattas(data);
-  recent.value = data.slice(0,3)
-})
-
-function sortRegattas(array): Array<Regatta> {
-  return array.sort((a,b) => a.name.localeCompare(b.name))
-  //TODO: implement sort by date
-}
+  await regattas.loadRegattas();
+});
 </script>
 
 <style scoped>

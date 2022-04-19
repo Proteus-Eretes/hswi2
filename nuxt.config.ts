@@ -3,7 +3,9 @@ import { defineNuxtConfig } from 'nuxt3'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
     css: [ '@/assets/css/style.scss' ],
-    buildModules: ['@pinia/nuxt'],
+    buildModules: [
+        '@pinia/nuxt',
+    ],
     meta: {
         link: [
             {
@@ -12,4 +14,7 @@ export default defineNuxtConfig({
             },
         ],
     },
+    publicRuntimeConfig: {
+        BASE_URL: 'http://localhost/hoesnelwasik_api/api/'
+    }
 })

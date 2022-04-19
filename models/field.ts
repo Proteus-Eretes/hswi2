@@ -1,4 +1,4 @@
-export interface FieldInterface {
+export interface Field {
     blockid: string,
     blocknumber: number,
     category: string,
@@ -18,48 +18,9 @@ export interface FieldInterface {
     status: string,
 }
 
-export interface GetFieldInterfaceResponse {
+export interface GetFieldResponse {
     status: boolean,
-    fields: FieldInterface[],
+    fields: Field[],
     message: string,
     name: string,
-}
-
-export class Field {
-    blockId: string;
-    blockNumber: number;
-    category: string;
-    dayDate: string;
-    fieldId: string;
-    fieldStartTime: null;
-    fieldNameShort: string;
-    isApproved: boolean;
-    isLight: boolean;
-    isMan: boolean;
-    name: string;
-    numberOfRowers: number;
-    numberOfTeams: number;
-    slotId: string;
-    startorder: null;
-    startTime: string;
-    status: string;
-
-    constructor(field: FieldInterface) {
-        this.blockId = field.blockid;
-        this.blockNumber = field.blocknumber;
-        this.category = field.category;
-        this.dayDate = field.daydate;
-        this.fieldId = field.field_id;
-        this.fieldStartTime = field.field_starttime;
-        this.fieldNameShort = field.fieldnameshort;
-        this.isApproved = field.isapproved;
-        this.isLight = field.islight;
-        this.isMan = field.isman;
-        this.numberOfRowers = field.numberofrowers;
-        this.numberOfTeams = field.numberofteams;
-        this.slotId = field.slotid;
-        this.startorder = field.startorder;
-        this.startTime = field.starttime;
-        this.status = field.status;
-    }
 }

@@ -1,4 +1,12 @@
 {
   // https://v3.nuxtjs.org/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/dayjs",
+      "dayjs/plugin/relativeTime",
+      "@pinia/nuxt",
+    ]
+  },
 }

@@ -5,6 +5,13 @@
 </template>
 
 <script setup lang="ts">
+import {useFieldStore} from "~/stores/field";
+
+const fields = useFieldStore();
+
+onMounted(async () => {
+  await fields.loadFields();
+})
 </script>
 
 <style scoped lang="scss">

@@ -1,18 +1,19 @@
 <template>
-  <NuxtLink id="card" :to="regatta.link">
+  <NuxtLink id="card" :to="'/' + regatta.shortname + '/' + regatta.jaar" >
     <div id="content">
       <img id="logo" :src="logo" alt="logo"/>
-      <span id="title">{{ regatta.name }}</span>
+      <span id="title">{{ regatta.regattaname }}</span>
       <span>Meer info hier</span>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import {Regatta, RegattaNotFound} from "~/models/regatta";
+import {PropType} from "@vue/runtime-core";
+import {Regatta} from "~/models/regatta";
 
 defineProps({
-  regatta: { type: Regatta, default: RegattaNotFound },
+  regatta: { type: Object as PropType<Regatta>, required: true },
   logo:  { type: String, default:"/logo.png" },
 });
 </script>
