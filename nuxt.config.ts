@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     css: [ '@/assets/css/style.scss' ],
     buildModules: [
         '@pinia/nuxt',
+        '@vueuse/nuxt',
     ],
     meta: {
         link: [
@@ -15,6 +16,6 @@ export default defineNuxtConfig({
         ],
     },
     publicRuntimeConfig: {
-        BASE_URL: 'http://localhost/hoesnelwasik_api/api/'
+        BASE_URL: 'https://dev.hoesnelwasik.nl/api/'
     }
 })

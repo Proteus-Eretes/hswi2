@@ -21,18 +21,21 @@ export const useFieldStore = defineStore('fields', {
     }),
 
     getters: {
-        allFields(state: FieldState) {
+        allFields(state: FieldState): Field[] {
             return state.ids.map((id: string) => state.entities[id]);
             //TODO: Sort by name
-        }
+        },
+        selectedField(state: FieldState): Field {
+            return (
+                (state.selectedFieldId && state.entities[state.selectedFieldId]) || null
+            );
+        },
     },
 
     actions: {
-        async loadFields() {
+        async loadFields(): Promise<void> {
             const regattas = useRegattaStore();
-            if (this.selectedRegattaId == regattas.selectedId) {
-                return;
-            }
+            if (this.selectedRegattaId == regattas.selectedId) return;
 
             try {
                 const loadedFields = await fieldService.loadFields();
@@ -52,6 +55,9 @@ export const useFieldStore = defineStore('fields', {
                 console.error(error);
                 //TODO: Toaster met error message
             }
+        },
+        selectField(field: Field): void {
+            this.selectedId = field.field_id;
         }
     }
 });

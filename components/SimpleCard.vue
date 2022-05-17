@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink id="card" :to="'/' + regatta.shortname + '/' + regatta.jaar" >
+  <NuxtLink id="card" to="/match" >
     <div id="content">
       <img id="logo" :src="logo" alt="logo"/>
       <span id="title">{{ regatta.regattaname }}</span>

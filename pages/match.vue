@@ -1,16 +1,35 @@
 <template>
-  <div>HUTS</div>
+  <div id="name">
+    <span>{{ regattas.selectedId }}</span><br/>
+    <span>{{ fields.selectedRegattaId }}</span><br/>
+    <span>{{ clubs.selectedRegattaId }}</span><br/>
+    <NuxtLink to="/clubs">Clublist</NuxtLink><br/>
+  </div>
 </template>
 
 <script setup lang="ts">
+import {useFieldStore} from "~/stores/field";
+import {useClubStore} from "~/stores/club";
+import {useRegattaStore} from "~/stores/regatta";
+
+const regattas = useRegattaStore()
+const fields = useFieldStore();
+const clubs = useClubStore();
+
+onMounted(async () => {
+  await fields.loadFields();
+  await clubs.loadClubs();
+})
 </script>
 
 <style scoped lang="scss">
-div {
+#name {
   width: 100%;
-  height: 20rem;
-  text-align: center;
+  height: 50vh;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  color: black;
 }
 
 /* For desktop design */
