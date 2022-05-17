@@ -22,14 +22,19 @@ export const useClubStore = defineStore('clubs', {
     }),
 
     getters: {
-        allClubs(state: ClubState) {
+        allClubs(state: ClubState): Club[] {
             return state.ids.map((id: string) => state.entities[id]);
             //TODO: Sort by name
+        },
+        selectedClub(state: ClubState): Club {
+            return (
+                (state.selectedId && state.entities[state.selectedId]) || null
+            );
         }
     },
 
     actions: {
-        async loadClubs() {
+        async loadClubs(): Promise<void> {
             const regattas = useRegattaStore();
             if (this.selectedRegattaId == regattas.selectedId) {
                 return; // Clubs are already loaded
@@ -53,6 +58,9 @@ export const useClubStore = defineStore('clubs', {
                 console.error(error);
                 //TODO: Toaster met error message
             }
+        },
+        selectClub(club: Club): void {
+            this.selectedId = club.clubid;
         }
     }
 })

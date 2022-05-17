@@ -5,6 +5,7 @@ import {useRegattaService} from "~/composables/useRegattaService";
 const regattaService = useRegattaService();
 
 import { useDateFormatter } from '~~/composables/useDateFormatter';
+import {useStorage} from "@vueuse/core";
 const { isBeforeOrAfter } = useDateFormatter();
 
 interface RegattaState {
@@ -14,26 +15,26 @@ interface RegattaState {
 }
 
 export const useRegattaStore = defineStore('regattas', {
-    state: (): RegattaState => ({
+    state: () => useStorage<RegattaState>('regattaState', {
         ids: [],
         entities: {},
         selectedId: null,
     }),
 
     getters: {
-        allRegattas(state: RegattaState) {
-            return state.ids
-                .map((id: string) => state.entities[id])
-                .sort((a: Regatta, b: Regatta) =>
-                    isBeforeOrAfter(a.jaar, b.jaar)
-                );
+         allRegattas(state: RegattaState): Regatta[] {
+                return state.ids
+                    .map((id: string) => state.entities[id])
+                    .sort((a: Regatta, b: Regatta) =>
+                        isBeforeOrAfter(a.jaar, b.jaar)
+                    );
         },
-        selectedRegatta(state: RegattaState) {
+        selectedRegatta(state: RegattaState): Regatta {
             return (
                 (state.selectedId && state.entities[state.selectedId]) || null
             );
         },
-        recentRegattas(state:RegattaState) {
+        recentRegattas(state:RegattaState): Regatta[] {
             return state.ids
                 .map((id: string) => state.entities[id])
                 .sort((a: Regatta, b: Regatta) =>
@@ -43,7 +44,7 @@ export const useRegattaStore = defineStore('regattas', {
     },
 
     actions: {
-        async loadRegattas() {
+        async loadRegattas(): Promise<void> {
             try {
                 const loadedRegattas = await regattaService.loadRegattas();
 
@@ -62,8 +63,11 @@ export const useRegattaStore = defineStore('regattas', {
                 //TODO: Toaster met error message
             }
         },
-        selectRegatta(regatta: Regatta) {
+        selectRegatta(regatta: Regatta): void {
             this.selectedId = regatta.rid;
+        },
+        selectRegattaById(rid: string): void {
+            this.selectedId = rid;
         }
     },
 });
