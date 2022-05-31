@@ -29,7 +29,7 @@ import {useRegattaStore} from "~/stores/regatta";
 const regattas = useRegattaStore();
 
 onMounted(async () => {
-  await regattas.loadRegattas();
+  await regattas.load();
 });
 </script>
 
