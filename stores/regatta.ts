@@ -66,7 +66,7 @@ export const useRegattaStore = defineStore('regattas', {
         selectRegatta(regatta: Regatta): void {
             this.selectedId = regatta.rid;
         },
-        selectRegattaById(rid: string): void {
+        selectRegattaById(rid): void {
             this.selectedId = rid;
         }
     },

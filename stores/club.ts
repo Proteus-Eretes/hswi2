@@ -10,7 +10,6 @@ interface ClubState {
     ids: string[];
     entities: { [id: string]: Club };
     selectedId: string | null;
-    selectedRegattaId: string | null;
 }
 
 export const useClubStore = defineStore('clubs', {
@@ -18,7 +17,6 @@ export const useClubStore = defineStore('clubs', {
         ids: [],
         entities: {},
         selectedId: null,
-        selectedRegattaId: null,
     }),
 
     getters: {

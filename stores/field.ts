@@ -9,7 +9,6 @@ interface FieldState {
     ids: string[];
     entities: { [id: string]: Field };
     selectedFieldId: string | null;
-    selectedRegattaId: string | null;
 }
 
 export const useFieldStore = defineStore('fields', {
@@ -17,7 +16,6 @@ export const useFieldStore = defineStore('fields', {
         ids: [],
         entities: {},
         selectedFieldId: null,
-        selectedRegattaId: null,
     }),
 
     getters: {
