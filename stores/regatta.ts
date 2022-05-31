@@ -16,6 +16,7 @@ export const useRegattaStore = defineStore('regattas', () => {
     ids: [],
     entities: {},
     selectedId: null,
+    filteredIds: [],
   })
 
   const all = computed<Regatta[]>(() => data.value.ids.map(
@@ -28,6 +29,11 @@ export const useRegattaStore = defineStore('regattas', () => {
     (id: string) => data.value.entities[id]).sort(
       (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
     ).slice(0,3)
+  )
+  const filtered = computed<Regatta[]>(() => data.value.filteredIds.map(
+          (id: string) => data.value.entities[id]).sort(
+          (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
+      )
   )
 
   async function load(): Promise<void> {
@@ -55,8 +61,16 @@ export const useRegattaStore = defineStore('regattas', () => {
     data.value.selectedId = regatta.rid;
   }
 
-  function selectById(rid): void {
+  function selectById(rid: string): void {
     data.value.selectedId = rid;
+  }
+
+  function filter(name: string): void {
+    data.value.filteredIds = data.value.ids.filter(id => {
+      const regatta = data.value.entities[id]
+      return regatta.regattaname.toLowerCase().includes(name.toLowerCase()) || regatta.shortname === name
+    })
+    console.log(data.value.filteredIds)
   }
 
   return {
@@ -64,8 +78,10 @@ export const useRegattaStore = defineStore('regattas', () => {
     all,
     selected,
     recent,
+    filtered,
     load,
     select,
     selectById,
+    filter,
   }
 })
