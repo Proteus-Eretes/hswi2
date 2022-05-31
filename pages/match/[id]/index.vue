@@ -1,8 +1,8 @@
 <template>
   <div id="name">
     <span>{{ regattas.selectedId }}</span><br/>
-    <span>{{ fields.selectedRegattaId }}</span><br/>
-    <span>{{ clubs.selectedRegattaId }}</span><br/>
+    <span>{{ fields.selectedId }}</span><br/>
+    <span>{{ clubs.selectedId }}</span><br/>
     <NuxtLink :to="'/match/' + $route.params.id + '/clubs'">Clublist</NuxtLink><br/>
   </div>
 </template>
@@ -17,9 +17,9 @@ const fields = useFieldStore();
 const clubs = useClubStore();
 
 onMounted(async () => {
-  regattas.selectRegattaById(useRoute().params.id)
-  await fields.loadFields();
-  await clubs.loadClubs();
+  regattas.selectById(useRoute().params.id)
+  await fields.load();
+  await clubs.load();
 })
 </script>
 

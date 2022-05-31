@@ -32,8 +32,8 @@ export const useRegattaStore = defineStore('regattas', () => {
 
   async function load(): Promise<void> {
     try {
-      const data = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL);
-      const loadedRegattas = data.regattas
+      const response = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL);
+      const loadedRegattas = response.regattas
 
       const regattaIds = loadedRegattas.map((regatta) => regatta.rid);
       const regattaEntities = loadedRegattas.reduce(
@@ -43,8 +43,8 @@ export const useRegattaStore = defineStore('regattas', () => {
         {}
       );
 
-      this.ids = regattaIds;
-      this.entities = regattaEntities;
+      data.value.ids = regattaIds;
+      data.value.entities = regattaEntities;
     } catch (error) {
       console.error(error);
       //TODO: Toaster met error message
@@ -52,14 +52,15 @@ export const useRegattaStore = defineStore('regattas', () => {
   }
 
   function select(regatta: Regatta): void {
-    this.selectedId = regatta.rid;
+    data.value.selectedId = regatta.rid;
   }
 
   function selectById(rid): void {
-    this.selectedId = rid;
+    data.value.selectedId = rid;
   }
 
   return {
+    state: data,
     all,
     selected,
     recent,

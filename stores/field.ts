@@ -2,32 +2,24 @@ import {defineStore} from "pinia";
 import {Field, GetFieldResponse} from "~/models/field";
 import {useRegattaStore} from "~/stores/regatta";
 
-interface FieldState {
-  ids: string[];
-  entities: { [id: string]: Field };
-  selectedFieldId: string | null;
-}
-
 export const useFieldStore = defineStore('fields', () => {
   const regattas = useRegattaStore()
 
   /* STATE */
-  const data = ref<FieldState>({
-    ids: [],
-    entities: {},
-    selectedFieldId: null,
-  })
+  const ids = ref<string[]>([])
+  const entities = ref<{ [id: string]: Field }>({})
+  const selectedId = ref<string>(null)
 
   /* GETTERS */
-  const all = computed<Field[]>(() => data.value.ids.map((id: string) => data.value.entities[id]))
-  const selected = computed<Field>(() => (data.value.selectedFieldId && data.value.entities[data.value.selectedFieldId]) || null)
+  const all = computed<Field[]>(() => ids.value.map((id: string) => entities.value[id]))
+  const selected = computed<Field>(() => (selectedId.value && entities.value[selectedId.value]) || null)
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
       const url = useRuntimeConfig().BASE_URL + `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/velden/`;
-      const data = await $fetch<GetFieldResponse>(url);
-      const loadedFields = data.fields
+      const response = await $fetch<GetFieldResponse>(url);
+      const loadedFields = response.fields
 
       const fieldIds = loadedFields.map((field) => field.field_id);
       const fieldEntities = loadedFields.reduce(
@@ -37,8 +29,8 @@ export const useFieldStore = defineStore('fields', () => {
         {}
       );
 
-      this.ids = fieldIds;
-      this.entities = fieldEntities;
+      ids.value = fieldIds;
+      entities.value = fieldEntities;
     } catch (error) {
       console.error(error);
       //TODO: Toaster met error message
@@ -46,11 +38,13 @@ export const useFieldStore = defineStore('fields', () => {
   }
 
   function select(field: Field): void {
-    this.selectedId = field.field_id;
+    selectedId.value = field.field_id;
   }
 
   return {
-    state: data,
+    ids,
+    entities,
+    selectedId,
     all,
     selected,
     load,

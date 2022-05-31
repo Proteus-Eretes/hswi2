@@ -2,32 +2,24 @@ import {defineStore} from "pinia";
 import {Club, ClubGet} from "~/models/club";
 import {useRegattaStore} from "~/stores/regatta";
 
-interface ClubState {
-  ids: string[];
-  entities: { [id: string]: Club };
-  selectedId: string | null;
-}
-
 export const useClubStore = defineStore('clubs', () => {
   const regattas = useRegattaStore()
 
   /* STATE */
-  const data = ref<ClubState>({
-    ids: [],
-    entities: {},
-    selectedId: null,
-  })
+  const ids = ref<string[]>([])
+  const entities = ref<{ [id: string]: Club }>({})
+  const selectedId = ref<string>(null)
 
   /* GETTERS */
-  const all = computed<Club[]>(() => data.value.ids.map((id: string) => data.value.entities[id]))
-  const selected = computed<Club>(() => (data.value.selectedId && data.value.entities[data.value.selectedId]) || null)
+  const all = computed<Club[]>(() => ids.value.map((id: string) => entities.value[id]))
+  const selected = computed<Club>(() => (selectedId.value && entities.value[selectedId.value]) || null)
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
       const url = useRuntimeConfig().BASE_URL + `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/clublist/`;
-      const data = await $fetch<ClubGet>(url);
-      const loadedClubs = data.clubs
+      const response = await $fetch<ClubGet>(url);
+      const loadedClubs = response.clubs
 
       const clubIds = loadedClubs.map((club) => club.clubid);
       const clubEntities = loadedClubs.reduce(
@@ -37,8 +29,8 @@ export const useClubStore = defineStore('clubs', () => {
         {}
       );
 
-      this.ids = clubIds;
-      this.entities = clubEntities;
+      ids.value = clubIds;
+      entities.value = clubEntities;
     } catch (error) {
       console.error(error);
       //TODO: Toaster met error message
@@ -46,11 +38,13 @@ export const useClubStore = defineStore('clubs', () => {
   }
 
   function select(club: Club): void {
-    this.selectedId = club.clubid;
+    selectedId.value = club.clubid;
   }
 
   return {
-    state: data,
+    ids,
+    entities,
+    selectedId,
     all,
     selected,
     load,
