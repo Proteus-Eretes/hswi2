@@ -1,64 +1,59 @@
 import {defineStore} from "pinia";
-
+import {Club, ClubGet} from "~/models/club";
 import {useRegattaStore} from "~/stores/regatta";
 
-import {Club} from "~/models/club";
-import {useClubService} from "~/composables/useClubService";
-const clubService = useClubService();
-
 interface ClubState {
-    ids: string[];
-    entities: { [id: string]: Club };
-    selectedId: string | null;
+  ids: string[];
+  entities: { [id: string]: Club };
+  selectedId: string | null;
 }
 
-export const useClubStore = defineStore('clubs', {
-    state: (): ClubState => ({
-        ids: [],
-        entities: {},
-        selectedId: null,
-    }),
+export const useClubStore = defineStore('clubs', () => {
+  const regattas = useRegattaStore()
 
-    getters: {
-        allClubs(state: ClubState): Club[] {
-            return state.ids.map((id: string) => state.entities[id]);
-            //TODO: Sort by name
+  /* STATE */
+  const data = ref<ClubState>({
+    ids: [],
+    entities: {},
+    selectedId: null,
+  })
+
+  /* GETTERS */
+  const all = computed<Club[]>(() => data.value.ids.map((id: string) => data.value.entities[id]))
+  const selected = computed<Club>(() => (data.value.selectedId && data.value.entities[data.value.selectedId]) || null)
+
+  /* FUNCTIONS */
+  async function load(): Promise<void> {
+    try {
+      const url = useRuntimeConfig().BASE_URL + `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/clublist/`;
+      const data = await $fetch<ClubGet>(url);
+      const loadedClubs = data.clubs
+
+      const clubIds = loadedClubs.map((club) => club.clubid);
+      const clubEntities = loadedClubs.reduce(
+        (entities: { [id: string]: Club }, club: Club) => {
+          return { ...entities, [club.clubid]: club };
         },
-        selectedClub(state: ClubState): Club {
-            return (
-                (state.selectedId && state.entities[state.selectedId]) || null
-            );
-        }
-    },
+        {}
+      );
 
-    actions: {
-        async loadClubs(): Promise<void> {
-            const regattas = useRegattaStore();
-            if (this.selectedRegattaId == regattas.selectedId) {
-                return; // Clubs are already loaded
-            }
-
-            try {
-                const loadedClubs = await clubService.loadClubs();
-
-                const clubIds = loadedClubs.map((club) => club.clubid);
-                const clubEntities = loadedClubs.reduce(
-                    (entities: { [id: string]: Club }, club: Club) => {
-                        return { ...entities, [club.clubid]: club };
-                    },
-                    {}
-                );
-
-                this.ids = clubIds;
-                this.entities = clubEntities;
-                this.selectedRegattaId = regattas.selectedId;
-            } catch (error) {
-                console.error(error);
-                //TODO: Toaster met error message
-            }
-        },
-        selectClub(club: Club): void {
-            this.selectedId = club.clubid;
-        }
+      this.ids = clubIds;
+      this.entities = clubEntities;
+    } catch (error) {
+      console.error(error);
+      //TODO: Toaster met error message
     }
+  }
+
+  function select(club: Club): void {
+    this.selectedId = club.clubid;
+  }
+
+  return {
+    state: data,
+    all,
+    selected,
+    load,
+    select,
+  }
 })
