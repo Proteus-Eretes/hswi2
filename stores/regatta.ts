@@ -1,73 +1,70 @@
 import {defineStore} from "pinia";
-
-import {Regatta} from "~/models/regatta";
-import {useRegattaService} from "~/composables/useRegattaService";
-const regattaService = useRegattaService();
-
 import { useDateFormatter } from '~~/composables/useDateFormatter';
 import {useStorage} from "@vueuse/core";
-const { isBeforeOrAfter } = useDateFormatter();
+import {GetRegattasResponse, Regatta} from "~/models/regatta";
 
 interface RegattaState {
-    ids: string[];
-    entities: { [id: string]: Regatta };
-    selectedId: string | null;
+  ids: string[];
+  entities: { [id: string]: Regatta };
+  selectedId: string | null;
 }
 
-export const useRegattaStore = defineStore('regattas', {
-    state: () => useStorage<RegattaState>('regattaState', {
-        ids: [],
-        entities: {},
-        selectedId: null,
-    }),
+export const useRegattaStore = defineStore('regattas', () => {
+  const {isBeforeOrAfter} = useDateFormatter()
 
-    getters: {
-         allRegattas(state: RegattaState): Regatta[] {
-                return state.ids
-                    .map((id: string) => state.entities[id])
-                    .sort((a: Regatta, b: Regatta) =>
-                        isBeforeOrAfter(a.jaar, b.jaar)
-                    );
-        },
-        selectedRegatta(state: RegattaState): Regatta {
-            return (
-                (state.selectedId && state.entities[state.selectedId]) || null
-            );
-        },
-        recentRegattas(state:RegattaState): Regatta[] {
-            return state.ids
-                .map((id: string) => state.entities[id])
-                .sort((a: Regatta, b: Regatta) =>
-                    isBeforeOrAfter(a.jaar, b.jaar)
-                ).slice(0,3);
-        },
-    },
+  const data = useStorage<RegattaState>('regattaState', {
+    ids: [],
+    entities: {},
+    selectedId: null,
+  })
 
-    actions: {
-        async loadRegattas(): Promise<void> {
-            try {
-                const loadedRegattas = await regattaService.loadRegattas();
+  const all = computed<Regatta[]>(() => data.value.ids.map(
+    (id: string) => data.value.entities[id]).sort(
+      (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
+    )
+  )
+  const selected = computed<Regatta>(() => (data.value.selectedId && data.value.entities[data.value.selectedId]) || null)
+  const recent = computed<Regatta[]>(() => data.value.ids.map(
+    (id: string) => data.value.entities[id]).sort(
+      (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
+    ).slice(0,3)
+  )
 
-                const regattaIds = loadedRegattas.map((regatta) => regatta.rid);
-                const regattaEntities = loadedRegattas.reduce(
-                    (entities: { [id: string]: Regatta }, regatta: Regatta) => {
-                        return { ...entities, [regatta.rid]: regatta };
-                    },
-                    {}
-                );
+  async function load(): Promise<void> {
+    try {
+      const data = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL);
+      const loadedRegattas = data.regattas
 
-                this.ids = regattaIds;
-                this.entities = regattaEntities;
-            } catch (error) {
-                console.error(error);
-                //TODO: Toaster met error message
-            }
+      const regattaIds = loadedRegattas.map((regatta) => regatta.rid);
+      const regattaEntities = loadedRegattas.reduce(
+        (entities: { [id: string]: Regatta }, regatta: Regatta) => {
+          return { ...entities, [regatta.rid]: regatta };
         },
-        selectRegatta(regatta: Regatta): void {
-            this.selectedId = regatta.rid;
-        },
-        selectRegattaById(rid): void {
-            this.selectedId = rid;
-        }
-    },
-});
+        {}
+      );
+
+      this.ids = regattaIds;
+      this.entities = regattaEntities;
+    } catch (error) {
+      console.error(error);
+      //TODO: Toaster met error message
+    }
+  }
+
+  function select(regatta: Regatta): void {
+    this.selectedId = regatta.rid;
+  }
+
+  function selectById(rid): void {
+    this.selectedId = rid;
+  }
+
+  return {
+    all,
+    selected,
+    recent,
+    load,
+    select,
+    selectById,
+  }
+})
