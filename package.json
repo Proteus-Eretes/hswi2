@@ -9,14 +9,15 @@
     "@vueuse/core": "^8.3.1",
     "@vueuse/nuxt": "^8.3.1",
     "cypress": "^10.0.1",
-    "nuxt": "npm:nuxt3@latest"
+    "nuxt": "npm:nuxt3@latest",
+    "postcss": "^8.4.6",
+    "sass": "^1.45.2",
+    "typescript": "^4.7.2"
   },
   "dependencies": {
     "@mdi/font": "^6.5.95",
     "@nuxtjs/dayjs": "^1.4.1",
     "@pinia/nuxt": "^0.1.8",
-    "pinia": "^2.0.12",
-    "postcss": "^8.4.6",
-    "sass": "^1.45.2"
+    "pinia": "^2.0.12"
   }
 }
