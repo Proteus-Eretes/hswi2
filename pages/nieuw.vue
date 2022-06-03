@@ -16,9 +16,7 @@
 </template>
 
 <script setup lang="ts">
-
 import RegattaSearch from "~/components/RegattaSearch.vue";
-import {Regatta} from "~/models/regatta";
 import {useRegattaStore} from "~/stores/regatta";
 
 definePageMeta({
@@ -26,13 +24,6 @@ definePageMeta({
 });
 
 const regattas = useRegattaStore();
-const recent = ref();
-const filtered = ref<Regatta[]>();
-
-function sortRegattas(array): Array<Regatta> {
-  return array.sort((a,b) => a.regattaname.localeCompare(b.regattaname))
-  //TODO: implement sort by date
-}
 </script>
 
 <style scoped lang="scss">
