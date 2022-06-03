@@ -1,8 +1,6 @@
 <template>
   <div id="name">
-    <span>{{ regattas.selectedId }}</span><br/>
-    <span>{{ fields.selectedId }}</span><br/>
-    <span>{{ clubs.selectedId }}</span><br/>
+    <span>{{ regattas.state.selectedId }}</span><br/>
     <NuxtLink :to="'/match/' + $route.params.id + '/clubs'">Clublist</NuxtLink><br/>
   </div>
 </template>

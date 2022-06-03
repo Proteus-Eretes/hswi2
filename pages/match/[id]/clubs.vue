@@ -1,5 +1,5 @@
 <template>
-  <Clublist :clubs="clubs.allClubs"/>
+  <Clublist :clubs="clubs.all"/>
 </template>
 
 <script setup lang="ts">
