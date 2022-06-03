@@ -1,11 +1,26 @@
 <template>
   <div id="wrapper">
-    <input type="text" placeholder="Zoeken">
-    <button><i class="material-icons">search</i></button>
+    <input type="text" placeholder="Zoeken" v-model="input" v-on:keyup.enter="search()">
+    <button @click="search()" ><i class="material-icons">search</i></button>
   </div>
 </template>
 
 <script setup lang="ts">
+
+import { ref } from "vue";
+import {useRegattaStore} from "~/stores/regatta";
+const regattas = useRegattaStore()
+
+onMounted(async() => {
+  await regattas.load()
+})
+
+const input = ref("")
+   async function search()
+      {
+        console.log(input.value)
+        regattas.filter(input.value)
+      }
 </script>
 
 <style scoped lang="scss">

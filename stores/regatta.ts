@@ -12,12 +12,15 @@ interface RegattaState {
 export const useRegattaStore = defineStore('regattas', () => {
   const {isBeforeOrAfter} = useDateFormatter()
 
+  /* STATE */
   const data = useStorage<RegattaState>('regattaState', {
     ids: [],
     entities: {},
     selectedId: null,
   })
+  const filteredIds = ref<string[]>([])
 
+  /* GETTERS */
   const all = computed<Regatta[]>(() => data.value.ids.map(
     (id: string) => data.value.entities[id]).sort(
       (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
@@ -29,7 +32,13 @@ export const useRegattaStore = defineStore('regattas', () => {
       (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
     ).slice(0,3)
   )
+  const filtered = computed<Regatta[]>(() => filteredIds.value.map(
+          (id: string) => data.value.entities[id]).sort(
+          (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
+      )
+  )
 
+  /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
       const response = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL);
@@ -55,17 +64,27 @@ export const useRegattaStore = defineStore('regattas', () => {
     data.value.selectedId = regatta.rid;
   }
 
-  function selectById(rid): void {
+  function selectById(rid: string): void {
     data.value.selectedId = rid;
+  }
+
+  function filter(name: string): void {
+    filteredIds.value = data.value.ids.filter(id => {
+      const regatta = data.value.entities[id]
+      return regatta.regattaname.toLowerCase().includes(name.toLowerCase()) || regatta.shortname === name
+    })
   }
 
   return {
     state: data,
+    filteredIds,
     all,
     selected,
     recent,
+    filtered,
     load,
     select,
     selectById,
+    filter,
   }
 })
