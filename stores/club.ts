@@ -1,8 +1,8 @@
-import {defineStore} from "pinia";
-import {Club, ClubGet} from "~/models/club";
-import {useRegattaStore} from "~/stores/regatta";
+import { defineStore } from "pinia"
+import useRegattaStore from "~/stores/regatta"
+import { Club, ClubGet } from "~/models/club"
 
-export const useClubStore = defineStore('clubs', () => {
+export default defineStore('clubs', () => {
   const regattas = useRegattaStore()
 
   /* STATE */
@@ -17,28 +17,25 @@ export const useClubStore = defineStore('clubs', () => {
   /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
-      const url = useRuntimeConfig().BASE_URL + `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/clublist/`;
-      const response = await $fetch<ClubGet>(url);
+      const url = `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/clublist/`
+      const response = await $fetch<ClubGet>(useRuntimeConfig().BASE_URL + url)
       const loadedClubs = response.clubs
 
-      const clubIds = loadedClubs.map((club) => club.clubid);
-      const clubEntities = loadedClubs.reduce(
-        (entities: { [id: string]: Club }, club: Club) => {
-          return { ...entities, [club.clubid]: club };
-        },
-        {}
-      );
+      const clubIds = loadedClubs.map((club) => club.clubid)
+      const clubEntities = loadedClubs.reduce((entities: { [id: string]: Club }, club: Club) => {
+          return { ...entities, [club.clubid]: club }
+        }, {})
 
-      ids.value = clubIds;
-      entities.value = clubEntities;
+      ids.value = clubIds
+      entities.value = clubEntities
     } catch (error) {
-      console.error(error);
+      console.error(error)
       //TODO: Toaster met error message
     }
   }
 
   function select(club: Club): void {
-    selectedId.value = club.clubid;
+    selectedId.value = club.clubid
   }
 
   return {

@@ -1,24 +1,24 @@
 <template>
   <div id="name">
-    <span>{{ regattas.state.selectedId }}</span><br/>
-    <NuxtLink :to="'/match/' + $route.params.id + '/clubs'">Clublist</NuxtLink><br/>
+    <span>{{ regattas.state.selectedId }}</span>
+    <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
-import {useFieldStore} from "~/stores/field";
-import {useClubStore} from "~/stores/club";
-import {useRegattaStore} from "~/stores/regatta";
+import useFieldStore from "~/stores/field";
+import useClubStore from "~/stores/club";
+import useRegattaStore from "~/stores/regatta";
 
-const regattas = useRegattaStore()
+const regattas = useRegattaStore();
 const fields = useFieldStore();
 const clubs = useClubStore();
 
 onMounted(async () => {
-  regattas.selectById(useRoute().params.id)
+  regattas.selectById(useRoute().params.id as string);
   await fields.load();
   await clubs.load();
-})
+});
 </script>
 
 <style scoped lang="scss">
@@ -33,6 +33,5 @@ onMounted(async () => {
 
 /* For desktop design */
 @media only screen and(min-width: 768px) {
-
 }
 </style>

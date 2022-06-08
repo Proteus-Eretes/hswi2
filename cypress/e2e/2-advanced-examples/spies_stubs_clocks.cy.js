@@ -146,13 +146,13 @@ context('Spies, Stubs, and Clock', () => {
     // let's confirm "add" method was called with two numbers
     expect(spy).to.be.calledWith(Cypress.sinon.match.number, Cypress.sinon.match.number)
 
-    // alternatively, provide the value to match
+    // alternatively, provide the value to regatta
     expect(spy).to.be.calledWith(Cypress.sinon.match(2), Cypress.sinon.match(3))
 
-    // match any value
+    // regatta any value
     expect(spy).to.be.calledWith(Cypress.sinon.match.any, 3)
 
-    // match any value from a list
+    // regatta any value from a list
     expect(spy).to.be.calledWith(Cypress.sinon.match.in([1, 2, 3]), 3)
 
     /**
@@ -162,7 +162,7 @@ context('Spies, Stubs, and Clock', () => {
     const isEven = (x) => x % 2 === 0
 
     // expect the value to pass a custom predicate function
-    // the second argument to "sinon.match(predicate, message)" is
+    // the second argument to "sinon.regatta(predicate, message)" is
     // shown if the predicate does not pass and assertion fails
     expect(spy).to.be.calledWith(Cypress.sinon.match(isEven, 'isEven'), 3)
 

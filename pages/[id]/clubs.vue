@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import {useClubStore} from "~/stores/club";
+import useClubStore from "~/stores/club";
 
 const clubs = useClubStore()
 </script>
