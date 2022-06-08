@@ -19,9 +19,9 @@ context('Assertions', () => {
         .should('have.html', 'Column content')
         // chai-jquery uses "is()" to check if element matches selector
         .should('match', 'td')
-        // to match text content against a regular expression
+        // to regatta text content against a regular expression
         // first need to invoke jQuery method text()
-        // and then match using regular expression
+        // and then regatta using regular expression
         .invoke('text')
         .should('match', /column content/i)
 

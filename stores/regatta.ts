@@ -1,7 +1,7 @@
-import {defineStore} from "pinia";
-import { useDateFormatter } from '~~/composables/useDateFormatter';
-import {useStorage} from "@vueuse/core";
-import {GetRegattasResponse, Regatta} from "~/models/regatta";
+import { defineStore } from "pinia"
+import { useStorage } from "@vueuse/core"
+import { useDateFormatter } from '~~/composables/useDateFormatter'
+import {GetRegattasResponse, Regatta} from "~/models/regatta"
 
 interface RegattaState {
   ids: string[];
@@ -9,7 +9,7 @@ interface RegattaState {
   selectedId: string | null;
 }
 
-export const useRegattaStore = defineStore('regattas', () => {
+export default defineStore('regattas', () => {
   const {isBeforeOrAfter} = useDateFormatter()
 
   /* STATE */
@@ -21,51 +21,43 @@ export const useRegattaStore = defineStore('regattas', () => {
   const filteredIds = ref<string[]>([])
 
   /* GETTERS */
-  const all = computed<Regatta[]>(() => data.value.ids.map(
-    (id: string) => data.value.entities[id]).sort(
-      (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
-    )
-  )
+  const all = computed<Regatta[]>(() => data.value.ids
+    .map((id: string) => data.value.entities[id])
+    .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)))
   const selected = computed<Regatta>(() => (data.value.selectedId && data.value.entities[data.value.selectedId]) || null)
-  const recent = computed<Regatta[]>(() => data.value.ids.map(
-    (id: string) => data.value.entities[id]).sort(
-      (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
-    ).slice(0,3)
-  )
-  const filtered = computed<Regatta[]>(() => filteredIds.value.map(
-          (id: string) => data.value.entities[id]).sort(
-          (a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)
-      )
-  )
+  const recent = computed<Regatta[]>(() => data.value.ids
+    .map((id: string) => data.value.entities[id])
+    .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar))
+    .slice(0,3))
+  const filtered = computed<Regatta[]>(() => filteredIds.value
+    .map((id: string) => data.value.entities[id])
+    .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)))
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
-      const response = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL);
+      const response = await $fetch<GetRegattasResponse>(useRuntimeConfig().BASE_URL)
       const loadedRegattas = response.regattas
 
-      const regattaIds = loadedRegattas.map((regatta) => regatta.rid);
-      const regattaEntities = loadedRegattas.reduce(
-        (entities: { [id: string]: Regatta }, regatta: Regatta) => {
-          return { ...entities, [regatta.rid]: regatta };
-        },
-        {}
-      );
+      const regattaIds = loadedRegattas.map((regatta) => regatta.rid)
+      const regattaEntities = loadedRegattas.reduce((entities: { [id: string]: Regatta }, regatta: Regatta) => {
+          return { ...entities, [regatta.rid]: regatta }
+        }, {})
 
-      data.value.ids = regattaIds;
-      data.value.entities = regattaEntities;
+      data.value.ids = regattaIds
+      data.value.entities = regattaEntities
     } catch (error) {
-      console.error(error);
+      console.error(error)
       //TODO: Toaster met error message
     }
   }
 
   function select(regatta: Regatta): void {
-    data.value.selectedId = regatta.rid;
+    data.value.selectedId = regatta.rid
   }
 
   function selectById(rid: string): void {
-    data.value.selectedId = rid;
+    data.value.selectedId = rid
   }
 
   function filter(name: string): void {
