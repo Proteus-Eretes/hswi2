@@ -24,7 +24,7 @@ import SimpleCard from "../components/SimpleCard.vue";
 import RegattaHighlight from "~/components/RegattaHighlight.vue";
 import RegattaList from "~/components/RegattaList.vue";
 import ListCard from "~/components/ListCard.vue";
-import useRegattaStore from "~/stores/regatta";
+import useRegattaStore from "~/stores/useRegattaStore";
 
 const regattas = useRegattaStore();
 

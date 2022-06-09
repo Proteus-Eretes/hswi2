@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
-import useRegattaStore from "~/stores/regatta"
-import useFieldStore from "~/stores/field"
+import useRegattaStore from "~/stores/useRegattaStore"
+import useFieldStore from "~/stores/useFieldStore"
 import { Team, TeamGet } from "~/models/team"
 
 export default defineStore("teams", () => {
@@ -11,9 +11,11 @@ export default defineStore("teams", () => {
   const ids = ref<string[]>([])
   const entities = ref<{ [id: string]: Team }>({})
   const selectedId = ref<string>(null)
+  const sortedIds = ref<string[]>([])
 
   /* GETTERS */
   const all = computed<Team[]>(() => ids.value.map((id: string) => entities.value[id]))
+  const sorted = computed<Team[]>(() => sortedIds.value.map((id: string) => entities.value[id]))
   const selected = computed<Team>(() => (selectedId.value && entities.value[selectedId.value]) || null)
 
   /* FUNCTIONS */
@@ -44,7 +46,9 @@ export default defineStore("teams", () => {
     ids,
     entities,
     selectedId,
+    sortedIds,
     all,
+    sorted,
     selected,
     load,
     select,

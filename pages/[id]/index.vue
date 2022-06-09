@@ -2,23 +2,18 @@
   <div id="name">
     <span>{{ regattas.state.selectedId }}</span>
     <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
+    <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
-import useFieldStore from "~/stores/field";
-import useClubStore from "~/stores/club";
-import useRegattaStore from "~/stores/regatta";
+import useRegattaStore from "~/stores/useRegattaStore"
 
-const regattas = useRegattaStore();
-const fields = useFieldStore();
-const clubs = useClubStore();
+const regattas = useRegattaStore()
 
 onMounted(async () => {
-  regattas.selectById(useRoute().params.id as string);
-  await fields.load();
-  await clubs.load();
-});
+  await regattas.selectById(useRoute().params.id as string)
+})
 </script>
 
 <style scoped lang="scss">

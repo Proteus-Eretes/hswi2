@@ -32,6 +32,7 @@ export default defineStore('regattas', () => {
   const filtered = computed<Regatta[]>(() => filteredIds.value
     .map((id: string) => data.value.entities[id])
     .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)))
+  const exists = computed<boolean>(() => data.value.selectedId !== null)
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
@@ -52,11 +53,13 @@ export default defineStore('regattas', () => {
     }
   }
 
-  function select(regatta: Regatta): void {
+  async function select(regatta: Regatta): Promise<void> {
+    if (!data.value.ids.includes(regatta.rid)) await load()
     data.value.selectedId = regatta.rid
   }
 
-  function selectById(rid: string): void {
+  async function selectById(rid: string): Promise<void> {
+    if (!data.value.ids.includes(rid)) await load()
     data.value.selectedId = rid
   }
 
@@ -74,6 +77,7 @@ export default defineStore('regattas', () => {
     selected,
     recent,
     filtered,
+    exists,
     load,
     select,
     selectById,

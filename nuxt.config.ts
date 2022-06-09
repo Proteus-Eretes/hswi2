@@ -1,6 +1,7 @@
 import {defineNuxtConfig} from "nuxt";
 
 export default defineNuxtConfig({
+    ssr: false,
     css: [ '@/assets/css/style.scss' ],
     buildModules: [
         '@pinia/nuxt',

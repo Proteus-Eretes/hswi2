@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import RegattaSearch from "~/components/RegattaSearch.vue";
-import useRegattaStore from "~/stores/regatta";
+import useRegattaStore from "~/stores/useRegattaStore";
 
 definePageMeta({
   layout: "noheader",

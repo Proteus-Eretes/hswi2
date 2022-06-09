@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import useRegattaStore from "~/stores/regatta";
+import useRegattaStore from "~/stores/useRegattaStore";
 
 const regattas = useRegattaStore()
 

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import useRegattaStore from "~/stores/regatta"
+import useRegattaStore from "~/stores/useRegattaStore"
 import { Club, ClubGet } from "~/models/club"
 
 export default defineStore('clubs', () => {

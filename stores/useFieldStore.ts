@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import useRegattaStore from "~/stores/regatta"
+import useRegattaStore from "~/stores/useRegattaStore"
 import { Field, GetFieldResponse } from "~/models/field"
 
 export default defineStore("fields", () => {
@@ -35,7 +35,14 @@ export default defineStore("fields", () => {
     }
   }
 
-  function select(field: Field): void {
+  async function select(field: Field): Promise<void> {
+    if (!ids.value.includes(field.field_id)) await load()
+    selectedId.value = field.field_id
+  }
+
+  async function selectByURL(name: string): Promise<void> {
+    const field = all.value.find((e: Field) => e.fieldnameshort == name)
+    if (field == null) await load()
     selectedId.value = field.field_id
   }
 
@@ -48,5 +55,6 @@ export default defineStore("fields", () => {
     url,
     load,
     select,
+    selectByURL,
   }
 })
