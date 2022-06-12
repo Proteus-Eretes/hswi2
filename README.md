@@ -1,6 +1,6 @@
-# HWSI2 Nuxt 3 Minimal Starter
+# HoeSnelWasIk? Web applicatie
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
+We recommend to look at the Nuxt [documentation](https://v3.nuxtjs.org).
 
 ## Setup
 
