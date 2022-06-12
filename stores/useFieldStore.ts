@@ -13,7 +13,7 @@ export default defineStore("fields", () => {
   /* GETTERS */
   const all = computed<Field[]>(() => ids.value.map((id: string) => entities.value[id]))
   const selected = computed<Field>(() => (selectedId.value && entities.value[selectedId.value]) || null)
-  const url = computed<string>(() => selected.value.fieldnameshort.replace(" ", "%20"))
+  const url = computed<string>(() => selected.value.fieldnameshort.replace(" ", "%20").replace("+", "%2B"))
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
