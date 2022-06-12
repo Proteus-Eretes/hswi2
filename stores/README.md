@@ -33,3 +33,9 @@ export default defineStore('storeName', () => {
   }
 })
 ```
+
+In de setup function van een `component` of `page` kun je bij de store met de volgende function call:
+
+```Typescript
+const store = useStore()
+```
