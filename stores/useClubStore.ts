@@ -34,8 +34,8 @@ export default defineStore('clubs', () => {
     }
   }
 
-  function select(club: Club): void {
-    selectedId.value = club.clubid
+  function select(clubId: string): void {
+    selectedId.value = clubId
   }
 
   return {

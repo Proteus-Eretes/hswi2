@@ -53,12 +53,7 @@ export default defineStore('regattas', () => {
     }
   }
 
-  async function select(regatta: Regatta): Promise<void> {
-    if (!data.value.ids.includes(regatta.rid)) await load()
-    data.value.selectedId = regatta.rid
-  }
-
-  async function selectById(rid: string): Promise<void> {
+  async function select(rid: string): Promise<void> {
     if (!data.value.ids.includes(rid)) await load()
     data.value.selectedId = rid
   }
@@ -80,7 +75,6 @@ export default defineStore('regattas', () => {
     exists,
     load,
     select,
-    selectById,
     filter,
   }
 })

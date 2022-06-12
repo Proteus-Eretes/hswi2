@@ -12,7 +12,7 @@ import useRegattaStore from "~/stores/useRegattaStore"
 const regattas = useRegattaStore()
 
 onMounted(async () => {
-  await regattas.selectById(useRoute().params.id as string)
+  await regattas.select(useRoute().params.id as string)
 })
 </script>
 
