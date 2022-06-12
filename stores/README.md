@@ -6,8 +6,7 @@ via een event, gebruiken we stores.
 
 Voor deze app gebruiken we [Pinia](https://pinia.vuejs.org/)
 
-De stores in deze folder zijn geschreven in de composition api.
-
+De stores in deze folder zijn geschreven in de composition api:
 ```Typescript
 export default defineStore('storeName', () => {
   
@@ -17,7 +16,7 @@ export default defineStore('storeName', () => {
   const selectedId: Ref<string> = ref(null)
 
   /* GETTERS */
-  const getterName: ComputedGetter<type> = computed(() => {return value})
+  const getterName = computed<type>(() => {return value})
 
   /* FUNCTIONS */
   function functionName(): void {
