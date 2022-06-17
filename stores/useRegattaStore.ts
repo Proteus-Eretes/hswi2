@@ -25,10 +25,7 @@ export default defineStore('regattas', () => {
     .map((id: string) => data.value.entities[id])
     .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)))
   const selected = computed<Regatta>(() => (data.value.selectedId && data.value.entities[data.value.selectedId]) || null)
-  const recent = computed<Regatta[]>(() => data.value.ids
-    .map((id: string) => data.value.entities[id])
-    .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar))
-    .slice(0,3))
+  const recent = computed<Regatta[]>(() => all.value.slice(0,3))
   const filtered = computed<Regatta[]>(() => filteredIds.value
     .map((id: string) => data.value.entities[id])
     .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)))

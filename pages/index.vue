@@ -21,7 +21,11 @@ definePageMeta({
   layout: "noheader",
 });
 
-const regattas = useRegattaStore();
+const regattas = useRegattaStore()
+
+onMounted(async () => {
+  await regattas.load()
+})
 </script>
 
 <style scoped lang="scss">
