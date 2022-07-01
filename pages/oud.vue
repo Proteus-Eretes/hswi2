@@ -2,10 +2,10 @@
   <div class="center-object">
     <RegattaHighlight text="Recente wedstrijden">
       <SimpleCard
-          v-for="regatta in regattas.recent"
-          :key="regatta.shortname"
-          :regatta="regatta"
-          @click="regattas.select(regatta)"
+        v-for="regatta in regattas.recent"
+        :key="regatta.shortname"
+        :regatta="regatta"
+        @click="regattas.select(regatta)"
       />
     </RegattaHighlight>
     <RegattaList>

@@ -10,7 +10,11 @@
     <tbody>
       <tr v-for="row in props.values" @click="$emit('click', row)">
         <td v-for="key in keys">
-          <img v-if="key === 'clubnameshort'" :src="`/${row[key]}.svg`" id="blade" />
+          <img
+            v-if="key === 'clubnameshort'"
+            :src="`/${row[key]}.svg`"
+            id="blade"
+          />
           <span v-else>{{ row[key] }}</span>
         </td>
       </tr>
@@ -20,15 +24,15 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  headings: string[]
-  keys: string[]
-  values: object[]
-}>()
+  headings: string[];
+  keys: string[];
+  values: object[];
+}>();
 
 defineEmits<{
-  (e: 'sort', heading: String): void
-  (e: 'click', row: Object): void
-}>()
+  (e: "sort", heading: String): void;
+  (e: "click", row: Object): void;
+}>();
 </script>
 
 <style scoped>
@@ -60,7 +64,7 @@ tr {
 }
 
 tr:hover {
-  background: #35A4FB !important;
+  background: #35a4fb !important;
 }
 
 tr:nth-child(odd) {
@@ -72,6 +76,5 @@ tr:nth-child(even) {
 }
 
 @media only screen and (min-width: 768px) {
-
 }
 </style>

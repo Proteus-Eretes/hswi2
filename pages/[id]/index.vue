@@ -7,13 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import useRegattaStore from "~/stores/useRegattaStore"
+import useRegattaStore from "~/stores/useRegattaStore";
 
-const regattas = useRegattaStore()
+const regattas = useRegattaStore();
 
 onMounted(async () => {
-  await regattas.select(useRoute().params.id as string)
-})
+  await regattas.select(useRoute().params.id as string);
+});
 </script>
 
 <style scoped lang="scss">

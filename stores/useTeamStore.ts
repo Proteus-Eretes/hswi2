@@ -1,45 +1,54 @@
-import { defineStore } from "pinia"
-import useRegattaStore from "~/stores/useRegattaStore"
-import useFieldStore from "~/stores/useFieldStore"
-import { Team, TeamGet } from "~/models/team"
+import { defineStore } from "pinia";
+import useRegattaStore from "~/stores/useRegattaStore";
+import useFieldStore from "~/stores/useFieldStore";
+import { Team, TeamGet } from "~/models/team";
 
 export default defineStore("teams", () => {
-  const regattas = useRegattaStore()
-  const fields = useFieldStore()
+  const regattas = useRegattaStore();
+  const fields = useFieldStore();
 
   /* STATE */
-  const ids = ref<string[]>([])
-  const entities = ref<{ [id: string]: Team }>({})
-  const selectedId = ref<string>(null)
-  const sortedIds = ref<string[]>([])
+  const ids = ref<string[]>([]);
+  const entities = ref<{ [id: string]: Team }>({});
+  const selectedId = ref<string>(null);
+  const sortedIds = ref<string[]>([]);
 
   /* GETTERS */
-  const all = computed<Team[]>(() => ids.value.map((id: string) => entities.value[id]))
-  const sorted = computed<Team[]>(() => sortedIds.value.map((id: string) => entities.value[id]))
-  const selected = computed<Team>(() => (selectedId.value && entities.value[selectedId.value]) || null)
+  const all = computed<Team[]>(() =>
+    ids.value.map((id: string) => entities.value[id])
+  );
+  const sorted = computed<Team[]>(() =>
+    sortedIds.value.map((id: string) => entities.value[id])
+  );
+  const selected = computed<Team>(
+    () => (selectedId.value && entities.value[selectedId.value]) || null
+  );
 
   /* FUNCTIONS */
   async function load(): Promise<void> {
     try {
-      const url = `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/${fields.url}/uitslagen`
-      const response = await $fetch<TeamGet>(useRuntimeConfig().BASE_URL + url)
-      const loadedTeams = response.teams
+      const url = `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/${fields.url}/uitslagen`;
+      const response = await $fetch<TeamGet>(useRuntimeConfig().BASE_URL + url);
+      const loadedTeams = response.teams;
 
-      const teamIds = loadedTeams.map((team) => team.knrbid)
-      const teamEntities = loadedTeams.reduce((entities: { [id: string]: Team }, team: Team) => {
-        return { ...entities, [team.knrbid]: team }
-      }, {})
+      const teamIds = loadedTeams.map((team) => team.knrbid);
+      const teamEntities = loadedTeams.reduce(
+        (entities: { [id: string]: Team }, team: Team) => {
+          return { ...entities, [team.knrbid]: team };
+        },
+        {}
+      );
 
-      ids.value = teamIds
-      entities.value = teamEntities
+      ids.value = teamIds;
+      entities.value = teamEntities;
     } catch (error) {
-      console.error(error)
+      console.error(error);
       //TODO: Toaster met error message
     }
   }
 
   function select(team: Team): void {
-    selectedId.value = team.knrbid
+    selectedId.value = team.knrbid;
   }
 
   return {
@@ -52,5 +61,5 @@ export default defineStore("teams", () => {
     selected,
     load,
     select,
-  }
-})
+  };
+});

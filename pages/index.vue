@@ -1,14 +1,14 @@
 <template>
   <div id="landing">
     <span id="title">HOE SNEL WAS IK?</span>
-    <RegattaSearch/>
+    <RegattaSearch />
     <span>Recente Regattas</span>
   </div>
   <RegattaList>
     <ListCard
-        v-for="regatta in regattas.filtered"
-        :key="regatta.shortname"
-        :regatta="regatta"
+      v-for="regatta in regattas.filtered"
+      :key="regatta.shortname"
+      :regatta="regatta"
     />
   </RegattaList>
 </template>
@@ -21,11 +21,11 @@ definePageMeta({
   layout: "noheader",
 });
 
-const regattas = useRegattaStore()
+const regattas = useRegattaStore();
 
 onMounted(async () => {
-  await regattas.load()
-})
+  await regattas.load();
+});
 </script>
 
 <style scoped lang="scss">

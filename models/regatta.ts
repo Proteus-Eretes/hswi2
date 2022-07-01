@@ -1,11 +1,11 @@
 export interface Regatta {
-    rid: string;
-    regattaname: string;
-    shortname: string;
-    jaar: Date;
+  rid: string;
+  regattaname: string;
+  shortname: string;
+  jaar: Date;
 }
 
 export interface GetRegattasResponse {
-    error: string;
-    regattas: Regatta[];
+  error: string;
+  regattas: Regatta[];
 }

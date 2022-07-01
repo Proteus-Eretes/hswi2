@@ -1,17 +1,17 @@
 <template>
   <div id="background">
     <div id="card">
-      {{props.details.rank}} {{props.details.name}} {{props.details.time}}
+      {{ props.details.rank }} {{ props.details.name }} {{ props.details.time }}
       <button @click="$emit('close')">Close</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ details }>()
+const props = defineProps<{ details }>();
 defineEmits<{
-  (e: 'close'): void,
-}>()
+  (e: "close"): void;
+}>();
 </script>
 
 <style scoped>
