@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import useRegattaStore from "~/stores/useRegattaStore";
+import useRegattaStore from '~/stores/useRegattaStore';
 
 const regattas = useRegattaStore();
 

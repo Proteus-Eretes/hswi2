@@ -30,8 +30,8 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-  (e: "sort", heading: String): void;
-  (e: "click", row: Object): void;
+  (e: 'sort', heading: String): void;
+  (e: 'click', row: Object): void;
 }>();
 </script>
 

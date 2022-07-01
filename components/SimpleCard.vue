@@ -9,12 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "@vue/runtime-core";
-import { Regatta } from "~/models/regatta";
+import { PropType } from '@vue/runtime-core';
+import { Regatta } from '~/models/regatta';
 
 defineProps({
   regatta: { type: Object as PropType<Regatta>, required: true },
-  logo: { type: String, default: "/logo.png" },
+  logo: { type: String, default: '/logo.png' },
 });
 </script>
 

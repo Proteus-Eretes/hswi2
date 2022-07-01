@@ -10,7 +10,7 @@
 <script setup lang="ts">
 const props = defineProps<{ details }>();
 defineEmits<{
-  (e: "close"): void;
+  (e: 'close'): void;
 }>();
 </script>
 

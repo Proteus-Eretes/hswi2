@@ -14,11 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import RegattaSearch from "~/components/RegattaSearch.vue";
-import useRegattaStore from "~/stores/useRegattaStore";
+import RegattaSearch from '~/components/RegattaSearch.vue';
+import useRegattaStore from '~/stores/useRegattaStore';
 
 definePageMeta({
-  layout: "noheader",
+  layout: 'noheader',
 });
 
 const regattas = useRegattaStore();

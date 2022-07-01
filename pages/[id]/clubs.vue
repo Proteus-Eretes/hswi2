@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import useClubStore from "~/stores/useClubStore";
-import useRegattaStore from "~/stores/useRegattaStore";
+import useClubStore from '~/stores/useClubStore';
+import useRegattaStore from '~/stores/useRegattaStore';
 
 const regattas = useRegattaStore();
 const clubs = useClubStore();

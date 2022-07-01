@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import { useStorage } from "@vueuse/core";
-import { useDateFormatter } from "~~/composables/useDateFormatter";
-import { GetRegattasResponse, Regatta } from "~/models/regatta";
+import { defineStore } from 'pinia';
+import { useStorage } from '@vueuse/core';
+import { useDateFormatter } from '~~/composables/useDateFormatter';
+import { GetRegattasResponse, Regatta } from '~/models/regatta';
 
 interface RegattaState {
   ids: string[];
@@ -9,11 +9,11 @@ interface RegattaState {
   selectedId: string | null;
 }
 
-export default defineStore("regattas", () => {
+export default defineStore('regattas', () => {
   const { isBeforeOrAfter } = useDateFormatter();
 
   /* STATE */
-  const data = useStorage<RegattaState>("regattaState", {
+  const data = useStorage<RegattaState>('regattaState', {
     ids: [],
     entities: {},
     selectedId: null,
@@ -24,18 +24,18 @@ export default defineStore("regattas", () => {
   const all = computed<Regatta[]>(() =>
     data.value.ids
       .map((id: string) => data.value.entities[id])
-      .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar))
+      .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)),
   );
   const selected = computed<Regatta>(
     () =>
       (data.value.selectedId && data.value.entities[data.value.selectedId]) ||
-      null
+      null,
   );
   const recent = computed<Regatta[]>(() => all.value.slice(0, 3));
   const filtered = computed<Regatta[]>(() =>
     filteredIds.value
       .map((id: string) => data.value.entities[id])
-      .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar))
+      .sort((a: Regatta, b: Regatta) => isBeforeOrAfter(a.jaar, b.jaar)),
   );
   const exists = computed<boolean>(() => data.value.selectedId !== null);
 
@@ -43,7 +43,7 @@ export default defineStore("regattas", () => {
   async function load(): Promise<void> {
     try {
       const response = await $fetch<GetRegattasResponse>(
-        useRuntimeConfig().BASE_URL
+        useRuntimeConfig().BASE_URL,
       );
       const loadedRegattas = response.regattas;
 
@@ -52,7 +52,7 @@ export default defineStore("regattas", () => {
         (entities: { [id: string]: Regatta }, regatta: Regatta) => {
           return { ...entities, [regatta.rid]: regatta };
         },
-        {}
+        {},
       );
 
       data.value.ids = regattaIds;

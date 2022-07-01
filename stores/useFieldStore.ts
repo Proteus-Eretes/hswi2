@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import useRegattaStore from "~/stores/useRegattaStore";
-import { Field, GetFieldResponse } from "~/models/field";
+import { defineStore } from 'pinia';
+import useRegattaStore from '~/stores/useRegattaStore';
+import { Field, GetFieldResponse } from '~/models/field';
 
-export default defineStore("fields", () => {
+export default defineStore('fields', () => {
   const regattas = useRegattaStore();
 
   /* STATE */
@@ -12,13 +12,13 @@ export default defineStore("fields", () => {
 
   /* GETTERS */
   const all = computed<Field[]>(() =>
-    ids.value.map((id: string) => entities.value[id])
+    ids.value.map((id: string) => entities.value[id]),
   );
   const selected = computed<Field>(
-    () => (selectedId.value && entities.value[selectedId.value]) || null
+    () => (selectedId.value && entities.value[selectedId.value]) || null,
   );
   const url = computed<string>(() =>
-    selected.value.fieldnameshort.replace(" ", "%20").replace("+", "%2B")
+    selected.value.fieldnameshort.replace(' ', '%20').replace('+', '%2B'),
   );
 
   /* FUNCTIONS */
@@ -26,7 +26,7 @@ export default defineStore("fields", () => {
     try {
       const url = `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/velden/`;
       const response = await $fetch<GetFieldResponse>(
-        useRuntimeConfig().BASE_URL + url
+        useRuntimeConfig().BASE_URL + url,
       );
       const loadedFields = response.fields;
 
@@ -35,7 +35,7 @@ export default defineStore("fields", () => {
         (entities: { [id: string]: Field }, field: Field) => {
           return { ...entities, [field.field_id]: field };
         },
-        {}
+        {},
       );
 
       ids.value = fieldIds;
@@ -54,13 +54,13 @@ export default defineStore("fields", () => {
   async function selectByURL(name: string): Promise<void> {
     let field = all.value.find(
       (e: Field) =>
-        e.fieldnameshort.replace("%20", " ").replace("%2B", "+") == name
+        e.fieldnameshort.replace('%20', ' ').replace('%2B', '+') == name,
     );
     if (field == null) {
       await load();
       field = all.value.find(
         (e: Field) =>
-          e.fieldnameshort.replace("%20", " ").replace("%2B", "+") == name
+          e.fieldnameshort.replace('%20', ' ').replace('%2B', '+') == name,
       );
     }
     selectedId.value = field.field_id;

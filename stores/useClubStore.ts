@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import useRegattaStore from "~/stores/useRegattaStore";
-import { Club, ClubGet } from "~/models/club";
+import { defineStore } from 'pinia';
+import useRegattaStore from '~/stores/useRegattaStore';
+import { Club, ClubGet } from '~/models/club';
 
-export default defineStore("clubs", () => {
+export default defineStore('clubs', () => {
   const regattas = useRegattaStore();
 
   /* STATE */
@@ -12,10 +12,10 @@ export default defineStore("clubs", () => {
 
   /* GETTERS */
   const all = computed<Club[]>(() =>
-    ids.value.map((id: string) => entities.value[id])
+    ids.value.map((id: string) => entities.value[id]),
   );
   const selected = computed<Club>(
-    () => (selectedId.value && entities.value[selectedId.value]) || null
+    () => (selectedId.value && entities.value[selectedId.value]) || null,
   );
 
   /* FUNCTIONS */
@@ -30,7 +30,7 @@ export default defineStore("clubs", () => {
         (entities: { [id: string]: Club }, club: Club) => {
           return { ...entities, [club.clubid]: club };
         },
-        {}
+        {},
       );
 
       ids.value = clubIds;

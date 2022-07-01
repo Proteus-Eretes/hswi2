@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 export const useDateFormatter = () => {
   return {
@@ -16,16 +16,16 @@ export const useDateFormatter = () => {
       return 0;
     },
     formatDate: (date: Date, includeYear: boolean = false) => {
-      const format = `DD MMM${includeYear ? " YYYY" : ""}`;
+      const format = `DD MMM${includeYear ? ' YYYY' : ''}`;
       return dayjs(date).format(format);
     },
     formatTime: (date: Date) => {
-      const format = "HH:mm";
+      const format = 'HH:mm';
       return dayjs(date).format(format);
     },
 
     formatInputDate: (date: Date) => {
-      const format = "YYYY-MM-DD";
+      const format = 'YYYY-MM-DD';
       return dayjs(date).format(format);
     },
     getInputDate: (date: string) => {
@@ -33,7 +33,7 @@ export const useDateFormatter = () => {
     },
 
     formatInputTime: (date: Date) => {
-      const format = "YYYY-MM-DDTHH:mm";
+      const format = 'YYYY-MM-DDTHH:mm';
       return dayjs(date).format(format);
     },
     getInputTime: (date: string) => {

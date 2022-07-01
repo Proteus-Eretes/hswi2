@@ -1,9 +1,9 @@
-import { defineStore } from "pinia";
-import useRegattaStore from "~/stores/useRegattaStore";
-import useFieldStore from "~/stores/useFieldStore";
-import { Team, TeamGet } from "~/models/team";
+import { defineStore } from 'pinia';
+import useRegattaStore from '~/stores/useRegattaStore';
+import useFieldStore from '~/stores/useFieldStore';
+import { Team, TeamGet } from '~/models/team';
 
-export default defineStore("teams", () => {
+export default defineStore('teams', () => {
   const regattas = useRegattaStore();
   const fields = useFieldStore();
 
@@ -15,13 +15,13 @@ export default defineStore("teams", () => {
 
   /* GETTERS */
   const all = computed<Team[]>(() =>
-    ids.value.map((id: string) => entities.value[id])
+    ids.value.map((id: string) => entities.value[id]),
   );
   const sorted = computed<Team[]>(() =>
-    sortedIds.value.map((id: string) => entities.value[id])
+    sortedIds.value.map((id: string) => entities.value[id]),
   );
   const selected = computed<Team>(
-    () => (selectedId.value && entities.value[selectedId.value]) || null
+    () => (selectedId.value && entities.value[selectedId.value]) || null,
   );
 
   /* FUNCTIONS */
@@ -36,7 +36,7 @@ export default defineStore("teams", () => {
         (entities: { [id: string]: Team }, team: Team) => {
           return { ...entities, [team.knrbid]: team };
         },
-        {}
+        {},
       );
 
       ids.value = teamIds;

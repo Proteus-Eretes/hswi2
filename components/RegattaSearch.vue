@@ -11,12 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import useRegattaStore from "~/stores/useRegattaStore";
+import { ref } from 'vue';
+import useRegattaStore from '~/stores/useRegattaStore';
 
 const regattas = useRegattaStore();
 
-const input = ref("");
+const input = ref('');
 
 function search(): void {
   regattas.filter(input.value);

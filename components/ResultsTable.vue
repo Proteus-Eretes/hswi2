@@ -23,7 +23,7 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-  (e: "click", result: any): void;
+  (e: 'click', result: any): void;
 }>();
 </script>
 
