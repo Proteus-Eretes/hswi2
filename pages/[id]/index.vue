@@ -3,7 +3,7 @@
     <span>{{ regattas.state.selectedId }}</span>
     <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
     <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
-    <div v-for="block in fields.groupedByBlock">
+    <div v-for="block in fields.groupedBlock">
       <Table :headings="headings" :keys="keys" :values="block"/>
     </div>
 
