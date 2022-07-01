@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Maak een bug report en help ons hoesnelwasik verbeteren
+about: Maak een bug report aan, en help ons hoesnelwasik.nl te verbeteren
 title: "[BUG] "
 labels: bug
 assignees: ''
