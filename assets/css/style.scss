@@ -1,97 +1,97 @@
 :root {
-    /* PRIMARY COLOR */
-    --primary-color-xx-light: #62B8FC;
-    --primary-color-x-light: #35A4FB;
-    --primary-color-light: #088FFA;
-    --primary-color: #0476D0;
-    --primary-color-dark: #035CA3;
-    --primary-color-x-dark: #024376;
-    --primary-color-xx-dark: #012949;
+  /* PRIMARY COLOR */
+  --primary-color-xx-light: #62b8fc;
+  --primary-color-x-light: #35a4fb;
+  --primary-color-light: #088ffa;
+  --primary-color: #0476d0;
+  --primary-color-dark: #035ca3;
+  --primary-color-x-dark: #024376;
+  --primary-color-xx-dark: #012949;
 
-    /* SECONDARY COLOR */
-    --secondary-color-light: #e6ffff;
-    --secondary-color: #b3e5fc;
-    --secondary-color-dark: #82b3c9;
+  /* SECONDARY COLOR */
+  --secondary-color-light: #e6ffff;
+  --secondary-color: #b3e5fc;
+  --secondary-color-dark: #82b3c9;
 
-    /* 50(ish) SHADES OF GREY */
-    --grey-color-1000: hsl(0, 0%, 0%);
-    --grey-color-900: hsl(214.7, 22.9%, 16.3%);
-    --grey-color-800: hsl(215.6, 16.4%, 32.4%);
-    --grey-color-700: hsl(215.2, 11.7%, 48.4%);
-    --grey-color-600: hsl(214.6, 14.3%, 64.3%);
-    --grey-color-500: hsl(207.3, 18%, 76.1%);
-    --grey-color-400: hsl(206.7, 20.5%, 82.7%);
-    --grey-color-300: hsl(210, 25.8%, 87.8%);
-    --grey-color-200: hsl(207.3, 29.7%, 92.7%);
-    --grey-color-100: hsl(210, 16.7%, 97.6%);
-    --grey-color-000: hsl(0, 0%, 100%);
+  /* 50(ish) SHADES OF GREY */
+  --grey-color-1000: hsl(0, 0%, 0%);
+  --grey-color-900: hsl(214.7, 22.9%, 16.3%);
+  --grey-color-800: hsl(215.6, 16.4%, 32.4%);
+  --grey-color-700: hsl(215.2, 11.7%, 48.4%);
+  --grey-color-600: hsl(214.6, 14.3%, 64.3%);
+  --grey-color-500: hsl(207.3, 18%, 76.1%);
+  --grey-color-400: hsl(206.7, 20.5%, 82.7%);
+  --grey-color-300: hsl(210, 25.8%, 87.8%);
+  --grey-color-200: hsl(207.3, 29.7%, 92.7%);
+  --grey-color-100: hsl(210, 16.7%, 97.6%);
+  --grey-color-000: hsl(0, 0%, 100%);
 
-    --black-color: #000000;
-    --white-color: var(--grey-color-000);
-    --text-dark-color: var(--grey-color-900);
+  --black-color: #000000;
+  --white-color: var(--grey-color-000);
+  --text-dark-color: var(--grey-color-900);
 
-    /* SPECIAL COLORS | TODO: revision, colors are now chosen arbirary */
-    --transparent-color: transparent;
-    --success-color: hsl(120, 100%, 50%);
+  /* SPECIAL COLORS | TODO: revision, colors are now chosen arbirary */
+  --transparent-color: transparent;
+  --success-color: hsl(120, 100%, 50%);
 
-    /* CORNER RADIUS */
-    --corner-radius-large: 0.5rem;
-    --corner-radius: 0.25rem;
-    --corner-radius-small: 0.125rem;
-    --inner-corner-radius: 10px;
+  /* CORNER RADIUS */
+  --corner-radius-large: 0.5rem;
+  --corner-radius: 0.25rem;
+  --corner-radius-small: 0.125rem;
+  --inner-corner-radius: 10px;
 
-    /* WIDTH */
-    --width-full: 100%;
-    --width-huge: 768px;
-    --width-large: 640px;
-    --width-medium: 512px;
-    --width-small: 256px;
-    --width-tiny: 128px;
+  /* WIDTH */
+  --width-full: 100%;
+  --width-huge: 768px;
+  --width-large: 640px;
+  --width-medium: 512px;
+  --width-small: 256px;
+  --width-tiny: 128px;
 
-    --max-width: 90vw;
-    --text-max-width: 24rem;
+  --max-width: 90vw;
+  --text-max-width: 24rem;
 
-    /* FONT SIZE */
-    --title: 30px;
-    --subtitle: 24px;
-    --header: 20px;
-    --subheader: 18px;
-    --small: 16px;
-    --tiny: 12px;
+  /* FONT SIZE */
+  --title: 30px;
+  --subtitle: 24px;
+  --header: 20px;
+  --subheader: 18px;
+  --small: 16px;
+  --tiny: 12px;
 
-    /* BORDER */
-    --border: 1px solid var(--grey-color-700);
+  /* BORDER */
+  --border: 1px solid var(--grey-color-700);
 
-    /* PADDING */
-    --padding-huge: 24px;
-    --padding-large: 16px;
-    --padding-medium: 12px;
-    --padding-small: 8px;
-    --padding-tiny: 4px;
-    --padding-input: var(--padding-medium) var(--padding-small);
+  /* PADDING */
+  --padding-huge: 24px;
+  --padding-large: 16px;
+  --padding-medium: 12px;
+  --padding-small: 8px;
+  --padding-tiny: 4px;
+  --padding-input: var(--padding-medium) var(--padding-small);
 
-    /* MARGIN */
-    --margin-huge: 40px;
-    --margin-large: 32px;
-    --margin-medium: 12px;
-    --margin-small: 8px;
-    --margin-tiny: 4px;
-    --margin-input: var(--padding-medium) var(--padding-small);
+  /* MARGIN */
+  --margin-huge: 40px;
+  --margin-large: 32px;
+  --margin-medium: 12px;
+  --margin-small: 8px;
+  --margin-tiny: 4px;
+  --margin-input: var(--padding-medium) var(--padding-small);
 
-    /* ELEMENT SPECIFICATIONS */
-    --background-color: var(--secondary-color-light);
-    --color: var(--black-color);
+  /* ELEMENT SPECIFICATIONS */
+  --background-color: var(--secondary-color-light);
+  --color: var(--black-color);
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "HelveticaNeue", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background: var(--background-color);
-    color: var(--color);
+  margin: 0;
+  padding: 0;
+  font-family: 'HelveticaNeue', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--background-color);
+  color: var(--color);
 }

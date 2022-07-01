@@ -2,13 +2,12 @@
   <div id="wrapper">
     <span id="title">Alle Wedstrijden</span>
     <div id="content">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 #title {

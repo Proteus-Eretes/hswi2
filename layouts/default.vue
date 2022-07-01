@@ -7,7 +7,7 @@
     </div>
   </div>
   <div id="content">
-    <slot/>
+    <slot />
   </div>
   <div id="footer">
     <span>Hoe Snel Was Ik Footer</span>
@@ -40,7 +40,7 @@
   padding: 0.5rem;
   border-radius: var(--corner-radius);
 
-  &>i {
+  & > i {
     flex: 1;
     text-align: right;
   }

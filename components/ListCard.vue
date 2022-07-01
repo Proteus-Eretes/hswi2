@@ -1,17 +1,17 @@
 <template>
   <NuxtLink id="card" :to="'/' + regatta.rid">
-    <img id="logo" :src="logo" alt="logo"/>
-    <span id="title">{{ regatta.regattaname }} {{regatta.jaar}}</span>
+    <img id="logo" :src="logo" alt="logo" />
+    <span id="title">{{ regatta.regattaname }} {{ regatta.jaar }}</span>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import {Regatta} from "~/models/regatta";
-import {PropType} from "@vue/runtime-core";
+import { Regatta } from '~/models/regatta';
+import { PropType } from '@vue/runtime-core';
 
 defineProps({
   regatta: { type: Object as PropType<Regatta>, required: true },
-  logo:  { type: String, default:"/logo.png" },
+  logo: { type: String, default: '/logo.png' },
 });
 </script>
 
@@ -24,7 +24,8 @@ defineProps({
   text-decoration: none;
   color: var(--color);
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background-color: var(--primary-color-x-dark);
     cursor: pointer;
   }
