@@ -24,10 +24,8 @@ async function navigateToField(field: Field): Promise<void> {
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string)
   await fields.load()
-  await clubs.load()
 })
 </script>
 
 <style scoped>
-
 </style>

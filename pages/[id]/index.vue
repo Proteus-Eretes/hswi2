@@ -21,6 +21,8 @@ onMounted(async () => {
   width: 100%;
   height: 50vh;
   display: flex;
+  flex-direction: column;
+  row-gap: 3%;
   justify-content: center;
   align-items: center;
   color: black;
