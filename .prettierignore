@@ -4,6 +4,4 @@ coverage
 .nuxt
 .output
 node_modules
-README.md
-CODE_OF_CONDUCT.md
-LICENSE.md
+*.md
