@@ -41,8 +41,11 @@ export default defineStore("fields", () => {
   }
 
   async function selectByURL(name: string): Promise<void> {
-    const field = all.value.find((e: Field) => e.fieldnameshort == name)
-    if (field == null) await load()
+    let field = all.value.find((e: Field) => e.fieldnameshort.replace('%20', ' ').replace('%2B', '+') == name)
+    if (field == null) {
+      await load()
+      field = all.value.find((e: Field) => e.fieldnameshort.replace('%20', ' ').replace('%2B', '+') == name)
+    }
     selectedId.value = field.field_id
   }
 

@@ -10,7 +10,8 @@
     <tbody>
       <tr v-for="row in props.values" @click="$emit('click', row)">
         <td v-for="key in keys">
-          {{ row[key] }}
+          <img v-if="key === 'clubnameshort'" :src="`/${row[key]}.svg`" id="blade" />
+          <span v-else>{{ row[key] }}</span>
         </td>
       </tr>
     </tbody>
@@ -31,6 +32,13 @@ defineEmits<{
 </script>
 
 <style scoped>
+#blade {
+  width: 50px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -43,12 +51,12 @@ th {
 }
 
 td {
-  padding: 5px;
+  padding: 3px 0 0 0;
   color: black;
 }
 
 tr {
-  border-bottom: 1px solid #ddd;
+  border: none;
 }
 
 tr:hover {
@@ -56,11 +64,11 @@ tr:hover {
 }
 
 tr:nth-child(odd) {
-  background: #fff;
+  background: var(--grey-color-100);
 }
 
 tr:nth-child(even) {
-  background: #eee;
+  background: var(--grey-color-200);
 }
 
 @media only screen and (min-width: 768px) {

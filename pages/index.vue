@@ -1,41 +1,57 @@
 <template>
-  <div class="center-object">
-    <RegattaHighlight text="Recente wedstrijden">
-      <SimpleCard
-          v-for="regatta in regattas.recent"
-          :key="regatta.shortname"
-          :regatta="regatta"
-          @click="regattas.select(regatta)"
-      />
-    </RegattaHighlight>
-    <RegattaList>
-      <ListCard
-        v-for="regatta in regattas.all"
+  <div id="landing">
+    <span id="title">HOE SNEL WAS IK?</span>
+    <RegattaSearch/>
+    <span>Recente Regattas</span>
+  </div>
+  <RegattaList>
+    <ListCard
+        v-for="regatta in regattas.filtered"
         :key="regatta.shortname"
         :regatta="regatta"
-        @click="regattas.select(regatta)"
-      />
-    </RegattaList>
-  </div>
+    />
+  </RegattaList>
 </template>
 
 <script setup lang="ts">
-import SimpleCard from "../components/SimpleCard.vue";
-import RegattaHighlight from "~/components/RegattaHighlight.vue";
-import RegattaList from "~/components/RegattaList.vue";
-import ListCard from "~/components/ListCard.vue";
+import RegattaSearch from "~/components/RegattaSearch.vue";
 import useRegattaStore from "~/stores/useRegattaStore";
 
-const regattas = useRegattaStore();
+definePageMeta({
+  layout: "noheader",
+});
+
+const regattas = useRegattaStore()
 
 onMounted(async () => {
-  await regattas.load();
-});
+  await regattas.load()
+})
 </script>
 
-<style scoped>
-.center-object {
+<style scoped lang="scss">
+#landing {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  height: 100vh;
+  background-color: #012949;
+}
+
+#title {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+#recent {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* For desktop design */
+@media only screen and(min-width: 768px) {
 }
 </style>

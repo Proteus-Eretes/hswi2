@@ -16,18 +16,16 @@ const clubs = useClubStore()
 const headings: Ref<string[]> = ref(['Block', 'Category', 'Field', 'Number of Rowers', 'Number of Teams', 'Start Time'])
 const keys: Ref<string[]> = ref(['blocknumber', 'category', 'fieldnameshort', 'numberofrowers', 'numberofteams', 'starttime'])
 
-function navigateToField(field: Field): void {
-  fields.select(field)
+async function navigateToField(field: Field): Promise<void> {
+  await fields.select(field)
   useRouter().push(`/${useRoute().params.id}/results/${fields.url}`)
 }
 
 onMounted(async () => {
-  await regattas.selectById(useRoute().params.id as string)
+  await regattas.select(useRoute().params.id as string)
   await fields.load()
-  await clubs.load()
 })
 </script>
 
 <style scoped>
-
 </style>

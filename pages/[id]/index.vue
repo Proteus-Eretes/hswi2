@@ -12,7 +12,7 @@ import useRegattaStore from "~/stores/useRegattaStore"
 const regattas = useRegattaStore()
 
 onMounted(async () => {
-  await regattas.selectById(useRoute().params.id as string)
+  await regattas.select(useRoute().params.id as string)
 })
 </script>
 
@@ -21,6 +21,8 @@ onMounted(async () => {
   width: 100%;
   height: 50vh;
   display: flex;
+  flex-direction: column;
+  row-gap: 3%;
   justify-content: center;
   align-items: center;
   color: black;
