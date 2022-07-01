@@ -9,10 +9,18 @@ export default defineStore("fields", () => {
   const ids = ref<string[]>([])
   const entities = ref<{ [id: string]: Field }>({})
   const selectedId = ref<string>(null)
-
+  const groupedByBlock = reactive<{ [id: number]: Field[] }>({})
+  
   /* GETTERS */
   const all = computed<Field[]>(() => ids.value.map((id: string) => entities.value[id]))
   const selected = computed<Field>(() => (selectedId.value && entities.value[selectedId.value]) || null)
+  const groupedBlock = computed<Field>(() => {
+    ids.value.map((id: string) => {
+      if (!(entities.value[id].blocknumber in groupedByBlock))
+        groupedByBlock[entities.value[id].blocknumber] = []
+      groupedByBlock[entities.value[id].blocknumber as number].push(entities.value[id])
+    })
+  })
   const url = computed<string>(() => selected.value.fieldnameshort.replace(" ", "%20").replace("+", "%2B"))
 
   /* FUNCTIONS */
@@ -53,9 +61,11 @@ export default defineStore("fields", () => {
     ids,
     entities,
     selectedId,
+    groupedByBlock,
     all,
     selected,
     url,
+    groupedBlock,
     load,
     select,
     selectByURL,

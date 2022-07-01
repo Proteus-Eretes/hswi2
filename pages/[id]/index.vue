@@ -3,16 +3,25 @@
     <span>{{ regattas.state.selectedId }}</span>
     <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
     <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
+    <div v-for="block in fields.groupedByBlock">
+      <Table :headings="headings" :keys="keys" :values="block"/>
+    </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import useRegattaStore from "~/stores/useRegattaStore"
+import useFieldStore from "~/stores/useFieldStore";
 
 const regattas = useRegattaStore()
+const fields = useFieldStore()
+const headings = ['Veld', 'Blok', 'Aantal Ploegen']
+const keys = ['fieldnameshort', 'blocknumber', 'numberofteams']
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string)
+  await fields.load()
 })
 </script>
 
