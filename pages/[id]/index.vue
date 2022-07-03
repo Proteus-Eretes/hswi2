@@ -3,13 +3,16 @@
     <span>{{ regattas.state.selectedId }}</span>
     <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
     <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
-      <BlockCard
-        v-for="block in fields.groupedBlock"
-        :key="block[0].blockid"
-        :block="block"
-      >
-      </BlockCard>
+    <div class="grid-container">
+      <div v-for="block in fields.groupedBlock" class="grid-item">
+        <BlockCard
+            :key="block[0].blockid"
+            :block="block"
+        >
+        </BlockCard>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +40,13 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
   color: black;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  gap: 50px;
 }
 
 /* For desktop design */
