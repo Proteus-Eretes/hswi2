@@ -6,8 +6,9 @@
     <div class="grid-container">
       <div v-for="block in fields.groupedBlock" class="grid-item">
         <BlockCard
+            id="blockcard"
             :key="block[0].blockid"
-            :block="block"
+            :fields="block"
         >
         </BlockCard>
       </div>
@@ -18,7 +19,6 @@
 <script setup lang="ts">
 import useRegattaStore from "~/stores/useRegattaStore"
 import useFieldStore from "~/stores/useFieldStore";
-import ListCard from "~/components/ListCard.vue";
 import BlockCard from "~/components/BlockCard.vue";
 
 const regattas = useRegattaStore()

@@ -1,41 +1,72 @@
 <template>
-  <NuxtLink id="card" >
-    <Table :headings="headings" :keys="keys" :values="block"/>
-  </NuxtLink>
+    <div class="block-header" >
+    {{ blockHeader }}
+    </div>
+    <Table :headings="headings" :keys="keys" :values="fields"/>
 </template>
 
 <script setup lang="ts">
+import {fieldStatus} from "~/components/fieldStatus";
 
-const headings = ['Veld', 'Blok', 'Aantal Ploegen']
-const keys = ['fieldnameshort', 'blocknumber', 'numberofteams']
+const headings = ['Veld', 'Aantal Ploegen', 'Status']
+const keys = ['fieldnameshort', 'numberofteams', 'status']
 
-defineProps({
-  block: []
+const props = defineProps({
+  fields: [],
 });
+
+const blockHeader = computed(() => {
+    return (
+        'Blok ' +
+        props.fields[0].blocknumber +
+        ': ' +
+        removeSeconds(props.fields[0].starttime)
+    );
+});
+
+
+function removeSeconds(starttime) {
+  return starttime.slice(0, starttime.lastIndexOf(':'));
+}
+
+
 </script>
 
 <style scoped lang="scss">
-#card {
-  display: flex;
-  width: 100%;
-  background-color: var(--primary-color-dark);
-  padding: 0.5rem;
-  text-decoration: none;
-  color: var(--color);
 
-  &:hover, &:active {
-    background-color: var(--primary-color-x-dark);
-    cursor: pointer;
-  }
+.block-header {
+  padding: 10px;
+  text-align: center;
+  background: #012949;
+  color: white;
+  font-size: 13px;
 }
 
-#title {
-  display: flex;
-  font-size: x-large;
-  width: 100%;
-  margin: auto 0;
-  justify-content: center;
-  text-align: center;
+.stat_official {
+  color: green;
+  font-weight: bold;
+}
+.stat_protest {
+  color: red;
+  font-weight: bold;
+}
+.stat_unofficial {
+  color: orange;
+  font-weight: bold;
+}
+.stat_started,
+.stat_finishing {
+  animation: blinker 2s linear infinite;
+  color: green;
+  font-weight: bold;
+}
+.stat_canceled {
+  color: #737373;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0.4;
+  }
 }
 
 /* For desktop design */
