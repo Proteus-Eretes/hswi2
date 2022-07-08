@@ -1,4 +1,4 @@
-import { Time } from "~/models/time";
+import { Time } from '~/models/time';
 
 export interface Team {
   clubname: string;

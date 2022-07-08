@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 defineProps({
-  text: { type: String, default: "Default Headline" },
+  text: { type: String, default: 'Default Headline' },
 });
 </script>
 
@@ -43,7 +43,7 @@ defineProps({
   }
 
   #wrapper {
-    background: url("/highlight_background.jpg") center;
+    background: url('/highlight_background.jpg') center;
     background-size: cover;
   }
 

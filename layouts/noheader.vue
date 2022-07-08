@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <slot/>
+    <slot />
   </div>
   <div id="footer">
     <span>Hoe Snel Was Ik Footer</span>
@@ -17,9 +17,7 @@
   justify-content: center;
 }
 
-
 /* For desktop design */
 @media only screen and (min-width: 768px) {
-
 }
 </style>

@@ -1,20 +1,18 @@
 <template>
-  <Clublist :clubs="clubs.all"/>
+  <Clublist :clubs="clubs.all" />
 </template>
 
 <script setup lang="ts">
-import useClubStore from "~/stores/useClubStore";
-import useRegattaStore from "~/stores/useRegattaStore";
+import useClubStore from '~/stores/useClubStore';
+import useRegattaStore from '~/stores/useRegattaStore';
 
-const regattas = useRegattaStore()
-const clubs = useClubStore()
+const regattas = useRegattaStore();
+const clubs = useClubStore();
 
 onMounted(async () => {
-  await regattas.select(useRoute().params.id as string)
-  await clubs.load()
-})
+  await regattas.select(useRoute().params.id as string);
+  await clubs.load();
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

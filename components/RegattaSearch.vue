@@ -1,25 +1,30 @@
 <template>
   <div id="wrapper">
-    <input type="text" placeholder="Zoeken" v-model="input" v-on:keyup.enter="search()">
+    <input
+      type="text"
+      placeholder="Zoeken"
+      v-model="input"
+      v-on:keyup.enter="search()"
+    />
     <button @click="search()"><i class="material-icons">search</i></button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import useRegattaStore from "~/stores/useRegattaStore";
+import { ref } from 'vue';
+import useRegattaStore from '~/stores/useRegattaStore';
 
-const regattas = useRegattaStore()
+const regattas = useRegattaStore();
 
-const input = ref("")
+const input = ref('');
 
 function search(): void {
-  regattas.filter(input.value)
+  regattas.filter(input.value);
 }
 
 onMounted(async () => {
-  await regattas.load()
-})
+  await regattas.load();
+});
 </script>
 
 <style scoped lang="scss">
@@ -40,12 +45,13 @@ onMounted(async () => {
     width: 5rem;
     border: none;
 
-    &:hover, &:focus {
-      background-color: #35A4FB;
+    &:hover,
+    &:focus {
+      background-color: #35a4fb;
     }
 
     &:active {
-      background-color: #088FFA;
+      background-color: #088ffa;
     }
   }
 }

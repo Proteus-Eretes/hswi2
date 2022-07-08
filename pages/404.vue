@@ -1,11 +1,8 @@
 <template>
-  <div id="message">
-    Deze pagina bestaat niet! sip times :(
-  </div>
+  <div id="message">Deze pagina bestaat niet! sip times :(</div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 #message {
@@ -20,6 +17,5 @@
 
 /* For desktop design */
 @media only screen and(min-width: 768px) {
-
 }
 </style>
