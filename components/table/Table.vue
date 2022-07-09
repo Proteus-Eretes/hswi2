@@ -11,7 +11,7 @@
       <tr v-for="row in props.values" @click="$emit('click', row)">
         <td v-for="obj in keyTypePairs">
           <component
-            :is="defineAsyncComponent(() => import(`./${obj.type}.vue`))"
+            :is="components[obj.type]"
             v-bind="{ data: reduceObject(row, obj.keys) }"
           />
         </td>
@@ -21,8 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from '#imports';
+import TextField from '~/components/table/TextField.vue';
+import FieldStatus from '~/components/table/FieldStatus.vue';
 
+const components = {
+  TextField: TextField,
+  FieldStatus: FieldStatus,
+};
 const props = defineProps<{
   headings: string[];
   keyTypePairs: { keys: string[]; type: string }[];
