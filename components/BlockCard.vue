@@ -1,38 +1,38 @@
 <template>
-    <div class="block-header" >
+  <div class="block-header">
     {{ blockHeader }}
-    </div>
-    <BlockTable :headings="headings" :keys="keys" :values="fields"/>
+  </div>
+  <Table :headings="headings" :key-type-pairs="keys" :values="fields" />
 </template>
 
 <script setup lang="ts">
+import { Field } from "~/models/field";
 
-const headings = ['Veld', 'Aantal Ploegen', 'Status']
-const keys = ['fieldnameshort', 'numberofteams', 'status']
+const headings = ["Veld", "Aantal Ploegen", "Status"];
+const keys = [
+  { keys: ["fieldnameshort"], type: "TextField" },
+  { keys: ["numberofteams"], type: "TextField" },
+  { keys: ["status", "starttime"], type: "FieldStatus" },
+];
 
-const props = defineProps({
-  fields: [],
-});
+const props = defineProps<{
+  fields: Field[];
+}>();
 
-const blockHeader = computed(() => {
-    return (
-        'Blok ' +
-        props.fields[0].blocknumber +
-        ': ' +
-        removeSeconds(props.fields[0].starttime)
-    );
-});
+const blockHeader = computed(
+  () =>
+    "Blok " +
+    props.fields[0].blocknumber +
+    ": " +
+    removeSeconds(props.fields[0].starttime)
+);
 
-
-function removeSeconds(starttime) {
-  return starttime.slice(0, starttime.lastIndexOf(':'));
+function removeSeconds(startTime: string): string {
+  return startTime.slice(0, startTime.lastIndexOf(":"));
 }
-
-
 </script>
 
 <style scoped lang="scss">
-
 .block-header {
   padding: 10px;
   text-align: center;
