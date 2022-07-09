@@ -6,13 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { Field } from "~/models/field";
+import { Field } from '~/models/field';
 
-const headings = ["Veld", "Aantal Ploegen", "Status"];
+const headings = ['Veld', 'Aantal Ploegen', 'Status'];
 const keys = [
-  { keys: ["fieldnameshort"], type: "TextField" },
-  { keys: ["numberofteams"], type: "TextField" },
-  { keys: ["status", "starttime"], type: "FieldStatus" },
+  { keys: ['fieldnameshort'], type: 'TextField' },
+  { keys: ['numberofteams'], type: 'TextField' },
+  { keys: ['status', 'starttime'], type: 'FieldStatus' },
 ];
 
 const props = defineProps<{
@@ -21,14 +21,14 @@ const props = defineProps<{
 
 const blockHeader = computed(
   () =>
-    "Blok " +
+    'Blok ' +
     props.fields[0].blocknumber +
-    ": " +
-    removeSeconds(props.fields[0].starttime)
+    ': ' +
+    removeSeconds(props.fields[0].starttime),
 );
 
 function removeSeconds(startTime: string): string {
-  return startTime.slice(0, startTime.lastIndexOf(":"));
+  return startTime.slice(0, startTime.lastIndexOf(':'));
 }
 </script>
 

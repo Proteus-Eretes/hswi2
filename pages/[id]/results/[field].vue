@@ -3,20 +3,20 @@
 </template>
 
 <script setup lang="ts">
-import useFieldStore from "~/stores/useFieldStore";
-import useTeamStore from "~/stores/useTeamStore";
-import useRegattaStore from "~/stores/useRegattaStore";
-import { onMounted } from "#imports";
+import useFieldStore from '~/stores/useFieldStore';
+import useTeamStore from '~/stores/useTeamStore';
+import useRegattaStore from '~/stores/useRegattaStore';
+import { onMounted } from '#imports';
 
 const regattas = useRegattaStore();
 const fields = useFieldStore();
 const teams = useTeamStore();
 
-const headings = ["", "Club Name", "Rower 8"];
+const headings = ['', 'Club Name', 'Rower 8'];
 const keys = [
-  { keys: ["clubnameshort"], type: "TextField" },
-  { keys: ["teamname"], type: "TextField" },
-  { keys: ["rower8"], type: "TextField" },
+  { keys: ['clubnameshort'], type: 'TextField' },
+  { keys: ['teamname'], type: 'TextField' },
+  { keys: ['rower8'], type: 'TextField' },
 ];
 
 onMounted(async () => {
