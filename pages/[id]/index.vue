@@ -1,6 +1,6 @@
 <template>
   <div id="name">
-    <span>{{ regattas.state.selectedId }}</span>
+    <span>{{ regattas.selected?.regattaname }}</span>
     <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
     <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
     <div class="grid-container">
@@ -27,11 +27,11 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 #name {
+  padding-top: 15px;
   width: 100%;
-  height: 50vh;
   display: flex;
   flex-direction: column;
-  row-gap: 3%;
+  row-gap: 15px;
   justify-content: center;
   align-items: center;
   color: black;
