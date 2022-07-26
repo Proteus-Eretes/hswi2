@@ -9,13 +9,11 @@
     </thead>
     <tbody>
       <tr v-for="row in props.values" @click="$emit('click', row)">
-        <td v-for="key in keys">
-          <img
-            v-if="key === 'clubnameshort'"
-            :src="`/${row[key]}.svg`"
-            id="blade"
+        <td v-for="obj in keyTypePairs">
+          <component
+            :is="components[obj.type]"
+            v-bind="{ data: reduceObject(row, obj.keys) }"
           />
-          <span v-else>{{ row[key] }}</span>
         </td>
       </tr>
     </tbody>
@@ -23,9 +21,16 @@
 </template>
 
 <script setup lang="ts">
+import TextField from '~/components/table/TextField.vue';
+import FieldStatus from '~/components/table/FieldStatus.vue';
+
+const components = {
+  TextField: TextField,
+  FieldStatus: FieldStatus,
+};
 const props = defineProps<{
   headings: string[];
-  keys: string[];
+  keyTypePairs: { keys: string[]; type: string }[];
   values: object[];
 }>();
 
@@ -33,6 +38,14 @@ defineEmits<{
   (e: 'sort', heading: String): void;
   (e: 'click', row: Object): void;
 }>();
+
+function reduceObject(obj: object, keys: string[]): object {
+  if (keys === undefined) return {};
+  return keys.reduce(function (newObj, key) {
+    if (key in obj) newObj[key] = obj[key];
+    return newObj;
+  }, {});
+}
 </script>
 
 <style scoped>
