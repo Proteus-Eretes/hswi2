@@ -12,7 +12,7 @@ const regattas = useRegattaStore();
 const fields = useFieldStore();
 const teams = useTeamStore();
 
-const headings = ['', 'Club Name', 'Rower 8'];
+const headings = ['', 'Team Name', 'Rower 8'];
 const keys = [
   { keys: ['clubnameshort'], type: 'TextField' },
   { keys: ['teamname'], type: 'TextField' },
