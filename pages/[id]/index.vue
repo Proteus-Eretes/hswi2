@@ -38,7 +38,8 @@ onMounted(async () => {
 }
 
 .grid-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: auto auto auto;
   padding: 10px;
   gap: 50px;
