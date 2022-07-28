@@ -2,18 +2,20 @@
   <div class="block-header">
     {{ blockHeader }}
   </div>
-  <Table :headings="headings" :key-type-pairs="keys" :values="fields" />
+  <Table :headings="headings" :values="fields" v-slot="{ row }">
+    <td>{{ row.fieldnameshort }}</td>
+    <td>{{ row.numberofteams }}</td>
+    <td>
+      <StatusField :status="row.status" :time="row.starttime" />
+    </td>
+  </Table>
 </template>
 
 <script setup lang="ts">
 import { Field } from '~/models/field';
+import StatusField from '~/components/table/StatusField.vue';
 
 const headings = ['Veld', 'Aantal Ploegen', 'Status'];
-const keys = [
-  { keys: ['fieldnameshort'], type: 'TextField' },
-  { keys: ['numberofteams'], type: 'TextField' },
-  { keys: ['status', 'starttime'], type: 'FieldStatus' },
-];
 
 const props = defineProps<{
   fields: Field[];

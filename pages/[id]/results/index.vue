@@ -1,10 +1,17 @@
 <template>
   <Table
     :headings="headings"
-    :key-type-pairs="keys"
     :values="fields.all"
+    v-slot="{ row }"
     @click="navigateToField"
-  />
+  >
+    <td>{{ row.blocknumber }}</td>
+    <td>{{ row.category }}</td>
+    <td>{{ row.fieldnameshort }}</td>
+    <td>{{ row.numberofrowers }}</td>
+    <td>{{ row.numberofteams }}</td>
+    <td>{{ row.starttime }}</td>
+  </Table>
 </template>
 
 <script setup lang="ts">
@@ -24,14 +31,6 @@ const headings = [
   'Number of Rowers',
   'Number of Teams',
   'Start Time',
-];
-const keys = [
-  { keys: ['blocknumber'], type: 'TextField' },
-  { keys: ['category'], type: 'TextField' },
-  { keys: ['fieldnameshort'], type: 'TextField' },
-  { keys: ['numberofrowers'], type: 'TextField' },
-  { keys: ['numberofteams'], type: 'TextField' },
-  { keys: ['starttime'], type: 'TextField' },
 ];
 
 async function navigateToField(field: Field): Promise<void> {

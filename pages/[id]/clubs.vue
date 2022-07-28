@@ -1,5 +1,9 @@
 <template>
-  <Table :headings="headings" :key-type-pairs="keys" :values="clubs.all" />
+  <Table :headings="headings" :values="clubs.all" v-slot="{ row }">
+    <td>{{ row.clubshort }}</td>
+    <td>{{ row.clubname }}</td>
+    <td>{{ row.numberofteams }}</td>
+  </Table>
 </template>
 
 <script setup lang="ts">
@@ -10,13 +14,7 @@ import { onMounted, useRoute } from '#imports';
 const regattas = useRegattaStore();
 const clubs = useClubStore();
 
-const headings = ['Blad', 'Code', 'Vereniging', 'Aantal Ploegen'];
-const keys = [
-  { keys: ['clubshort'], type: 'TextField' },
-  { keys: ['clubshort'], type: 'TextField' },
-  { keys: ['clubname'], type: 'TextField' },
-  { keys: ['numberofteams'], type: 'TextField' },
-];
+const headings = ['Blad', 'Vereniging', 'Aantal Ploegen'];
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);
