@@ -1,8 +1,8 @@
 <template>
   <div id="name">
     <span>{{ regattas.selected?.regattaname }}</span>
-    <NuxtLink :to="'/' + $route.params.id + '/clubs'">Clublist</NuxtLink>
-    <NuxtLink :to="'/' + $route.params.id + '/results'">Results</NuxtLink>
+    <NuxtLink :to="clubURL">Clublist</NuxtLink>
+    <NuxtLink :to="resultsURL">Results</NuxtLink>
     <div class="grid-container">
       <div v-for="block in fields.groupedBlock" class="grid-item">
         <BlockCard :key="block[0].blockid" :fields="block" />
@@ -18,6 +18,10 @@ import BlockCard from '~/components/BlockCard.vue';
 
 const regattas = useRegattaStore();
 const fields = useFieldStore();
+const route = useRoute();
+
+const clubURL = computed(() => `/${route.params.id}/clubs`);
+const resultsURL = computed(() => `/${route.params.id}/results`);
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);

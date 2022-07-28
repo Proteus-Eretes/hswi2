@@ -1,12 +1,13 @@
 <template>
-  <span :class="fieldStatus[data.status].class">{{ statusString }}</span>
+  <span :class="fieldStatus[status].class">{{ statusString }}</span>
 </template>
 
 <script setup lang="ts">
 import { computed } from '@vue/reactivity';
 
 const props = defineProps<{
-  data: { status: number; time: string };
+  status: string;
+  time: string;
 }>();
 
 const fieldStatus = [
@@ -20,9 +21,7 @@ const fieldStatus = [
 ];
 
 const statusString = computed(() => {
-  return props.data.status > 0
-    ? fieldStatus[props.data.status].name
-    : props.data.time;
+  return +props.status > 0 ? fieldStatus[props.status].name : props.time;
 });
 </script>
 
