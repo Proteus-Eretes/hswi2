@@ -28,13 +28,6 @@ defineEmits<{
 </script>
 
 <style scoped>
-#blade {
-  width: 50px;
-  height: 25px;
-  border: 1px solid black;
-  border-radius: 2px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;

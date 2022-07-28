@@ -1,7 +1,9 @@
 <template>
   <Table :headings="headings" :values="teams.all" v-slot="{ row }">
     <td>{{ row.times[0].rank }}</td>
-    <td>{{ row.clubnameshort }}</td>
+    <td>
+      <BladeField :code="row.clubnameshort" />
+    </td>
     <td>
       <TeamField
         :teamname="row.teamname"
@@ -22,6 +24,7 @@ import useRegattaStore from '~/stores/useRegattaStore';
 import { onMounted } from '#imports';
 import TeamField from '~/components/table/TeamField.vue';
 import TimeField from '~/components/table/TimeField.vue';
+import BladeField from '~/components/table/BladeField.vue';
 
 const regattas = useRegattaStore();
 const fields = useFieldStore();
