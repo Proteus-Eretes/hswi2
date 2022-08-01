@@ -1,9 +1,9 @@
 <template>
   <Table
-      :headings="headings"
-      :values="fields.all"
-      v-slot="{ row }"
-      @click="navigateToField"
+    :headings="headings"
+    :values="fields.all"
+    v-slot="{ row }"
+    @click="navigateToField"
   >
     <td>{{ row.blocknumber }}</td>
     <td>{{ row.fieldnameshort }}</td>
@@ -22,12 +22,7 @@ const regattas = useRegattaStore();
 const fields = useFieldStore();
 const clubs = useClubStore();
 
-const headings = [
-  'Block',
-  'Field',
-  'Number of Teams',
-  'Start Time',
-];
+const headings = ['Block', 'Field', 'Number of Teams', 'Start Time'];
 
 async function navigateToField(field: Field): Promise<void> {
   await fields.select(field);
