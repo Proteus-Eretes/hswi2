@@ -2,8 +2,9 @@ import { defineStore } from 'pinia';
 import useRegattaStore from '~/stores/useRegattaStore';
 import useFieldStore from '~/stores/useFieldStore';
 import { Team, TeamGet } from '~/models/team';
+import {DrawGet, DrawItem} from "~/models/draw";
 
-export default defineStore('teams', () => {
+export default defineStore('draw', () => {
     const regattas = useRegattaStore();
     const fields = useFieldStore();
 
@@ -28,12 +29,12 @@ export default defineStore('teams', () => {
     async function load(): Promise<void> {
         try {
             const url = `wd/${regattas.selected.shortname}/${regattas.selected.jaar}/${fields.url}/loting`;
-            const response = await $fetch<TeamGet>(useRuntimeConfig().BASE_URL + url);
+            const response = await $fetch<DrawGet>(useRuntimeConfig().BASE_URL + url);
             const loadedTeams = response.teams;
 
             const teamIds = loadedTeams.map((team) => team.knrbid);
             const teamEntities = loadedTeams.reduce(
-                (entities: { [id: string]: Team }, team: Team) => {
+                (entities: { [id: string]: DrawItem }, team: DrawItem) => {
                     return { ...entities, [team.knrbid]: team };
                 },
                 {},
