@@ -5,11 +5,9 @@
     v-slot="{ row }"
     @click="navigateToField"
   >
-    <td>{{ row.blocknumber }}</td>
-    <td>{{ row.category }}</td>
+    <td class="digit">{{ row.blocknumber }}</td>
     <td>{{ row.fieldnameshort }}</td>
-    <td>{{ row.numberofrowers }}</td>
-    <td>{{ row.numberofteams }}</td>
+    <td class="digit">{{ row.numberofteams }}</td>
     <td>{{ row.starttime }}</td>
   </Table>
 </template>
@@ -24,14 +22,7 @@ const regattas = useRegattaStore();
 const fields = useFieldStore();
 const clubs = useClubStore();
 
-const headings = [
-  'Block',
-  'Category',
-  'Field',
-  'Number of Rowers',
-  'Number of Teams',
-  'Start Time',
-];
+const headings = ['Block', 'Field', 'Number of Teams', 'Start Time'];
 
 async function navigateToField(field: Field): Promise<void> {
   await fields.select(field);
@@ -43,3 +34,8 @@ onMounted(async () => {
   await fields.load();
 });
 </script>
+<style scoped lang="scss">
+.digit {
+  text-align: center;
+}
+</style>
