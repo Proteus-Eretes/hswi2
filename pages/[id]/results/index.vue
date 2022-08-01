@@ -22,12 +22,7 @@ const regattas = useRegattaStore();
 const fields = useFieldStore();
 const clubs = useClubStore();
 
-const headings = [
-  'Block',
-  'Field',
-  'Number of Teams',
-  'Start Time',
-];
+const headings = ['Block', 'Field', 'Number of Teams', 'Start Time'];
 
 async function navigateToField(field: Field): Promise<void> {
   await fields.select(field);
@@ -40,7 +35,7 @@ onMounted(async () => {
 });
 </script>
 <style scoped lang="scss">
-.digit{
+.digit {
   text-align: center;
 }
 </style>
