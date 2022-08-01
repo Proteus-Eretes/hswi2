@@ -6,9 +6,7 @@
     @click="navigateToField"
   >
     <td>{{ row.blocknumber }}</td>
-    <td>{{ row.category }}</td>
     <td>{{ row.fieldnameshort }}</td>
-    <td>{{ row.numberofrowers }}</td>
     <td>{{ row.numberofteams }}</td>
     <td>{{ row.starttime }}</td>
   </Table>
@@ -26,9 +24,7 @@ const clubs = useClubStore();
 
 const headings = [
   'Block',
-  'Category',
   'Field',
-  'Number of Rowers',
   'Number of Teams',
   'Start Time',
 ];
@@ -43,3 +39,8 @@ onMounted(async () => {
   await fields.load();
 });
 </script>
+<style scoped lang="scss">
+td {
+  text-align: center;
+}
+</style>
