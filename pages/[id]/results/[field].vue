@@ -1,6 +1,6 @@
 <template>
-  <NuxtLink :to="fieldURL">Velden</NuxtLink>
-  <NuxtLink :to="drawURL">Naar loting</NuxtLink>
+  <a :href="fieldURL">Velden</a>
+  <a :href="drawURL">Naar loting</a>
 
   <Table :headings="headings" :values="teams.all" v-slot="{ row }">
     <td>{{ row.times[0].rank }}</td>

@@ -1,8 +1,8 @@
 <template>
   <div id="name">
     <span>{{ regattas.selected?.regattaname }}</span>
-    <NuxtLink :to="clubURL">Clublist</NuxtLink>
-    <NuxtLink :to="resultsURL">Results</NuxtLink>
+    <a :href="clubURL">Clublist</a>
+    <a :href="resultsURL">Results</a>
     <div class="grid-container">
       <div v-for="block in fields.groupedBlock" class="grid-item">
         <BlockCard :key="block[0].blockid" :fields="block" />

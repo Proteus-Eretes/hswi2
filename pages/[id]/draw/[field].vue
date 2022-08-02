@@ -1,6 +1,6 @@
 <template>
-  <NuxtLink :to="fieldURL">Velden</NuxtLink>
-  <NuxtLink :to="resultsURL">Naar uitslagen</NuxtLink>
+  <a :href="fieldURL">Velden</a>
+  <a :href="resultsURL">Naar uitslagen</a>
   <Table :headings="headings" :values="draws.all" v-slot="{ row }">
     <td>
       <BladeField :code="row.clubnameshort" />
