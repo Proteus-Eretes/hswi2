@@ -1,18 +1,20 @@
 <template>
-  <table>
-    <thead>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
       <tr>
         <th v-for="heading in props.headings" @click="$emit('sort', heading)">
           {{ heading }}
         </th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr v-for="row in props.values" @click="$emit('click', row)">
         <slot :row="row" :classes="'table-styling'">No Data</slot>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script setup lang="ts">

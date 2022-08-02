@@ -3,7 +3,6 @@
   <a :href="drawURL">Naar loting</a>
 
   <Table :headings="headings" :values="teams.all" v-slot="{ row }">
-    <td>{{ row.times[0].rank }}</td>
     <td>
       <BladeField :code="row.clubnameshort" />
     </td>
@@ -14,9 +13,7 @@
         :rower8="row.rower8"
       />
     </td>
-    <td>
-      <TimeField :time="row.times[0]" />
-    </td>
+    <TimesField :times="row.times"/>
   </Table>
 </template>
 
@@ -29,6 +26,7 @@ import TeamField from '~/components/table/TeamField.vue';
 import TimeField from '~/components/table/TimeField.vue';
 import BladeField from '~/components/table/BladeField.vue';
 import useDrawStore from '~/stores/useDrawStore';
+import TimesField from "~/components/TimesField.vue";
 
 // Navigation
 const fieldURL = computed(() => `/${route.params.id}/results/`);
@@ -41,7 +39,9 @@ const fields = useFieldStore();
 const teams = useTeamStore();
 const route = useRoute();
 
-const headings = ['', '', 'Ploeg', 'Tijd'];
+const headings = ['', 'Ploeg', 'Tijd1','Tijd2', 'Tijd3'];
+
+
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);
@@ -50,8 +50,8 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
+<style>
 td {
-  padding: 5px;
+  padding: 5px
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
-  <span id="time">{{ timeFormatter.secondsToTime(time.totaltime) }}</span>
-  <span id="rank"> [{{ time.rank }}]</span>
+  <td>
+    <span id="time">{{ timeFormatter.secondsToTime(time.totaltime) }}</span>
+    <span id="rank"> [{{ time.rank }}]</span>
+  </td>
 </template>
 
 <script setup lang="ts">
