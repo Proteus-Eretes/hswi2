@@ -1,19 +1,16 @@
 <template>
-  <Table :headings="headings" :values="teams.all" v-slot="{ row }">
-    <td>{{ row.times[0].rank }}</td>
+  <Table :headings="headings" :values="draws.all" v-slot="{ row }">
     <td>
       <BladeField :code="row.clubnameshort" />
     </td>
     <td>
       <TeamField
         :teamname="row.teamname"
-        :backnumber="row.times[0].backnumber"
+        :backnumber="row.backnumber"
         :rower8="row.rower8"
       />
     </td>
-    <td>
-      <TimeField :time="row.times[0]" />
-    </td>
+    <td>[ {{ row.tossorder }} ]</td>
   </Table>
 </template>
 
@@ -30,13 +27,14 @@ import useDrawStore from '~/stores/useDrawStore';
 const regattas = useRegattaStore();
 const fields = useFieldStore();
 const teams = useTeamStore();
+const draws = useDrawStore();
 
-const headings = ['', '', 'Ploeg', 'Tijd'];
+const headings = ['Vereniging', 'Ploeg', 'Volgorde'];
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);
   await fields.selectByURL(useRoute().params.field as string);
-  await teams.load();
+  await draws.load();
 });
 </script>
 
