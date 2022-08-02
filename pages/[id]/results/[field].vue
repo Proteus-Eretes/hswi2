@@ -25,6 +25,7 @@ import { onMounted } from '#imports';
 import TeamField from '~/components/table/TeamField.vue';
 import TimeField from '~/components/table/TimeField.vue';
 import BladeField from '~/components/table/BladeField.vue';
+import useDrawStore from '~/stores/useDrawStore';
 
 const regattas = useRegattaStore();
 const fields = useFieldStore();
