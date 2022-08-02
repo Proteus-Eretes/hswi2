@@ -1,6 +1,6 @@
 <template>
+  <span id="back-number">[{{ backnumber }}] </span>
   <span id="team-name">{{ teamname }}</span>
-  <span id="back-number">{{ backnumber }}</span>
   <br />
   <span id="rower-name">{{ rower8 }}</span>
 </template>
