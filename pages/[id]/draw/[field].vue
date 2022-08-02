@@ -1,4 +1,6 @@
 <template>
+  <a :href="fieldURL">Velden</a>
+  <a :href="resultsURL">Naar uitslagen</a>
   <Table :headings="headings" :values="draws.all" v-slot="{ row }">
     <td>
       <BladeField :code="row.clubnameshort" />
@@ -24,10 +26,17 @@ import TimeField from '~/components/table/TimeField.vue';
 import BladeField from '~/components/table/BladeField.vue';
 import useDrawStore from '~/stores/useDrawStore';
 
+// Navigation
+const fieldURL = computed(() => `/${route.params.id}/draw/`);
+const resultsURL = computed(
+  () => `/${route.params.id}/results/${route.params.field}`,
+);
+
+// Stores
 const regattas = useRegattaStore();
 const fields = useFieldStore();
-const teams = useTeamStore();
 const draws = useDrawStore();
+const route = useRoute();
 
 const headings = ['Vereniging', 'Ploeg', 'Volgorde'];
 
