@@ -12,7 +12,31 @@ export default defineStore('fields', () => {
   /* GETTERS */
 
   const all = computed<Field[]>(() =>
-    ids.value.map((id: string) => entities.value[id]),
+    ids.value.map((id: string) => entities.value[id]).sort((a,b) => {
+      let ba = a.blocknumber, bb = b.blocknumber;
+      let sa = a.starttime, sb = b.starttime;
+      let na = a.name, nb = b.name;
+
+      if(ba < bb){
+        return -1;
+      }else if(bb < ba){
+        return 1;
+      }
+
+      if (sa < sb) {
+        return -1
+      }
+      if (sa > sb) {
+        return 1
+      }
+      if(na < nb){
+        return -1;
+      }else if(nb < na){
+        return 1;
+      }
+
+      return 0
+    }),
   );
   const selected = computed<Field>(
     () => (selectedId.value && entities.value[selectedId.value]) || null,
