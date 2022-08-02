@@ -1,4 +1,7 @@
 <template>
+  <NuxtLink :to="fieldURL">Velden</NuxtLink>
+  <NuxtLink :to="drawURL">Naar loting</NuxtLink>
+
   <Table :headings="headings" :values="teams.all" v-slot="{ row }">
     <td>{{ row.times[0].rank }}</td>
     <td>
@@ -27,9 +30,14 @@ import TimeField from '~/components/table/TimeField.vue';
 import BladeField from '~/components/table/BladeField.vue';
 import useDrawStore from '~/stores/useDrawStore';
 
+// Navigation
+const fieldURL = computed(() => `/${route.params.id}/results/`);
+const drawURL = computed(() => `/${route.params.id}/draw/${route.params.field}`);
+
 const regattas = useRegattaStore();
 const fields = useFieldStore();
 const teams = useTeamStore();
+const route = useRoute();
 
 const headings = ['', '', 'Ploeg', 'Tijd'];
 
