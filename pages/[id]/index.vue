@@ -3,6 +3,7 @@
     <span>{{ regattas.selected?.regattaname }}</span>
     <a :href="clubURL">Clublist</a>
     <a :href="resultsURL">Results</a>
+    <a :href="drawURL">Loting</a>
     <div class="grid-container">
       <div v-for="block in fields.groupedBlock" class="grid-item">
         <BlockCard :key="block[0].blockid" :fields="block" />
@@ -22,6 +23,7 @@ const route = useRoute();
 
 const clubURL = computed(() => `/${route.params.id}/clubs`);
 const resultsURL = computed(() => `/${route.params.id}/results`);
+const drawURL = computed(() => `/${route.params.id}/draw`);
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);

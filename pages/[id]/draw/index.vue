@@ -5,9 +5,9 @@
     v-slot="{ row }"
     @click="navigateToField"
   >
-    <td>{{ row.blocknumber }}</td>
+    <td class="digit">{{ row.blocknumber }}</td>
     <td>{{ row.fieldnameshort }}</td>
-    <td>{{ row.numberofteams }}</td>
+    <td class="digit">{{ row.numberofteams }}</td>
     <td>{{ row.starttime }}</td>
   </Table>
 </template>
@@ -34,3 +34,8 @@ onMounted(async () => {
   await fields.load();
 });
 </script>
+<style scoped lang="scss">
+.digit {
+  text-align: center;
+}
+</style>
