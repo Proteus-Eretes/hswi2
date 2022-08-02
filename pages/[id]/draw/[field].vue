@@ -1,5 +1,5 @@
 <template>
-  <a :href="fieldURL">Velden</a><br>
+  <a :href="fieldURL">Velden</a><br />
   <a :href="resultsURL">Naar uitslagen</a>
   <Table :headings="headings" :values="draws.all" v-slot="{ row }">
     <td>
