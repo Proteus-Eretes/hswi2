@@ -32,7 +32,9 @@ import useDrawStore from '~/stores/useDrawStore';
 
 // Navigation
 const fieldURL = computed(() => `/${route.params.id}/results/`);
-const drawURL = computed(() => `/${route.params.id}/draw/${route.params.field}`);
+const drawURL = computed(
+  () => `/${route.params.id}/draw/${route.params.field}`,
+);
 
 const regattas = useRegattaStore();
 const fields = useFieldStore();

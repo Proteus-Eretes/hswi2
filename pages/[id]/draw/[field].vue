@@ -1,5 +1,4 @@
 <template>
-
   <NuxtLink :to="fieldURL">Velden</NuxtLink>
   <NuxtLink :to="resultsURL">Naar uitslagen</NuxtLink>
   <Table :headings="headings" :values="draws.all" v-slot="{ row }">
@@ -29,7 +28,9 @@ import useDrawStore from '~/stores/useDrawStore';
 
 // Navigation
 const fieldURL = computed(() => `/${route.params.id}/draw/`);
-const resultsURL = computed(() => `/${route.params.id}/results/${route.params.field}`);
+const resultsURL = computed(
+  () => `/${route.params.id}/results/${route.params.field}`,
+);
 
 // Stores
 const regattas = useRegattaStore();
