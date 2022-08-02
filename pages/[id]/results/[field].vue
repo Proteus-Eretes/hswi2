@@ -13,7 +13,7 @@
         :rower8="row.rower8"
       />
     </td>
-    <TimesField :times="row.times"/>
+    <TimesField :times="row.times" />
   </Table>
 </template>
 
@@ -26,7 +26,7 @@ import TeamField from '~/components/table/TeamField.vue';
 import TimeField from '~/components/table/TimeField.vue';
 import BladeField from '~/components/table/BladeField.vue';
 import useDrawStore from '~/stores/useDrawStore';
-import TimesField from "~/components/TimesField.vue";
+import TimesField from '~/components/TimesField.vue';
 
 // Navigation
 const fieldURL = computed(() => `/${route.params.id}/results/`);
@@ -39,9 +39,7 @@ const fields = useFieldStore();
 const teams = useTeamStore();
 const route = useRoute();
 
-const headings = ['', 'Ploeg', 'Tijd1','Tijd2', 'Tijd3'];
-
-
+const headings = ['', 'Ploeg', 'Tijd1', 'Tijd2', 'Tijd3'];
 
 onMounted(async () => {
   await regattas.select(useRoute().params.id as string);
@@ -52,6 +50,6 @@ onMounted(async () => {
 
 <style>
 td {
-  padding: 5px
+  padding: 5px;
 }
 </style>
